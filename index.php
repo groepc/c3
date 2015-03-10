@@ -60,12 +60,11 @@ if (defined('ENVIRONMENT')){
 new \core\config();
 
 //create alias for Router
-use \core\router,
-    \helpers\url;
+use \core\router;
+use \helpers\url;
 
 //define routes
-Router::any('', '\controllers\welcome@index');
-Router::any('/subpage', '\controllers\welcome@subpage');
+Router::any('', '\controllers\administration@index');
 
 //if no route found
 Router::error('\core\error@index');

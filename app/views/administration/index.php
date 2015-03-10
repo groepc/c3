@@ -1,0 +1,6 @@
+
+<div class="page-header">
+	<h1>Administration</h1>
+</div>
+
+<p>TEST</p>
