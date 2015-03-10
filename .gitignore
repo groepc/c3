@@ -1,2 +1,4 @@
-app/core/config.php
+app/core/DbConfig.php
+vendor
+.idea
 .DS_Store
