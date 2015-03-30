@@ -1,26 +1,22 @@
-<?php namespace helpers;
+<?php
+namespace helpers;
 
-use \PDO;
+use core\Logger;
+use PDO;
+use PDOException;
 
-/*
- * database Helper - extending PDO to use custom methods
- *
- * @author David Carr - dave@daveismyname.com - http://www.daveismyname.com
- * @version 2.1
- * @date June 27, 2014
- */
-class Database extends PDO{
-	
+class Database extends PDO
+{
 	/**
 	 * @var array Array of saved databases for reusing
 	 */
 	protected static $instances = array();
-	
+
 	/**
-	 * Static method get 
-	 * 
-	 * @param  array $group
-	 * @return \helpers\database
+	 * Static method get
+	 *
+	 * @param bool $group
+	 * @return Database
 	 */
 	public static function get ($group = false) {
 		// Determining if exists or it's not empty, then use default group defined in config

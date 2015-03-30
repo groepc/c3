@@ -1,12 +1,22 @@
-<?php namespace controllers;
-use core\view;
+<?php
+namespace controllers;
 
-class Administration extends \core\controller
+use core\Controller;
+use core\View;
+use helpers\Session;
+use helpers\Url;
+
+class Administration extends Controller
 {
 	/**
 	 * Call the parent construct
 	 */
-	public function __construct(){
+	public function __construct()
+	{
+		if (Session::get('login') == false) {
+			Url::redirect('auth/login');
+		}
+
 		parent::__construct();
 	}
 
@@ -18,5 +28,10 @@ class Administration extends \core\controller
 		View::rendertemplate('header');
 		View::render('administration/index');
 		View::rendertemplate('footer');
+	}
+
+	public function evaluation()
+	{
+
 	}
 }

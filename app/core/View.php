@@ -1,12 +1,6 @@
-<?php namespace core;
+<?php
+namespace core;
 
-/*
- * View - load template pages
- *
- * @author David Carr - dave@daveismyname.com - http://www.daveismyname.com
- * @version 2.1
- * @date June 27, 2014
- */
 class View {
 	
 	/**

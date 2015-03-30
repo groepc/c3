@@ -9,8 +9,9 @@
 	<!-- CSS -->
 	<?php
 		helpers\Assets::css(array(
-			'//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css',
-			helpers\Url::template_path() . 'css/style.css',
+			helpers\Url::template_path() . 'css/bootstrap.min.css',
+			helpers\Url::template_path() . 'css/login.css',
+			helpers\Url::template_path() . 'css/dashboard.css',
 		))
 	?>
 

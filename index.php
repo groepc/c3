@@ -1,4 +1,8 @@
 <?php
+
+use core\Config;
+use core\Router;
+
 if(file_exists('vendor/autoload.php')){
 	require 'vendor/autoload.php';
 } else {
@@ -8,8 +12,8 @@ if(file_exists('vendor/autoload.php')){
 	exit;
 }
 
-if (!is_readable('app/core/config.php')) {
-	die('No config.php found, configure and rename config.example.php to config.php in app/core.');
+if (!is_readable('app/core/Config.php')) {
+	die('No Config.php found, configure and rename Config.example.php to Config.php in app/core.');
 }
 
 /*
@@ -39,8 +43,8 @@ if (!is_readable('app/core/config.php')) {
  * By default development will show errors but production will hide them.
  */
 
-if (defined('ENVIRONMENT')){
-
+if (defined('ENVIRONMENT'))
+{
 	switch (ENVIRONMENT){
 		case 'development':
 			error_reporting(E_ALL);
@@ -53,21 +57,20 @@ if (defined('ENVIRONMENT')){
 		default:
 			exit('The application environment is not set correctly.');
 	}
-
 }
 
 //initiate config
-new \core\config();
-
-//create alias for Router
-use \core\router;
-use \helpers\url;
+new Config();
 
 //define routes
-Router::any('', '\controllers\administration@index');
+Router::any('', '\controllers\Administration@index');
+Router::any('administration', '\controllers\Administration@index');
+Router::any('auth', '\controllers\Auth@index');
+Router::any('auth/login', '\controllers\Auth@login');
+Router::any('auth/logout', '\controllers\Auth@logout');
 
 //if no route found
-Router::error('\core\error@index');
+Router::error('\core\Error@index');
 
 //turn on old style routing
 Router::$fallback = false;

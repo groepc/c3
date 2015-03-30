@@ -1,14 +1,10 @@
-<?php namespace core;
+<?php
+namespace core;
 
-/*
-* logger class - Custom errors
-*
-* @author David Carr - dave@daveismyname.com - http://www.daveismyname.com
-* @version 2.1
-* @date June 27, 2014
-*/
-class Logger {
+use Exception;
 
+class Logger
+{
 	/**
 	* determins if error should be displayed 
 	* @var boolean
@@ -57,8 +53,8 @@ class Logger {
 	* @param  boolean   $clear       clear the errorlog
 	* @param  string    $error_file  file to save to
 	*/
-	public static function newMessage(Exception $exception, $print_error = false, $clear = false, $error_file = 'errorlog.html') {
-
+	public static function newMessage(Exception $exception, $print_error = false, $clear = false, $error_file = 'errorlog.html')
+	{
 		$message = $exception->getMessage();
 		$code = $exception->getCode();
 		$file = $exception->getFile();
@@ -75,6 +71,8 @@ class Logger {
 		<h3>Stack trace:</h3>\n
 		<pre>{$trace}</pre>\n
 		<hr />\n";
+
+		var_dump($log_message);
 
 		if( is_file($error_file) === false ) {
 			file_put_contents($error_file, '');
@@ -100,8 +98,8 @@ class Logger {
 	* @param  boolean $print_error display error
 	* @param  string  $error_file  file to save to
 	*/
-	public static function errorMessage($error, $print_error = false, $error_file = 'errorlog.html') {
-
+	public static function errorMessage($error, $print_error = false, $error_file = '../errorlog.html')
+	{
 		$date = date('M d, Y G:iA');
 		$log_message = "<p>Error on $date - $error</p>";
 

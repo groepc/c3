@@ -1,6 +1,5 @@
-<?php namespace core;
-use core\view,
-	core\language;
+<?php
+namespace core;
 
 /*
  * controller - base controller

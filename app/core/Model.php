@@ -8,6 +8,8 @@
  * @date June 27, 2014
  */
 
+use helpers\Database;
+
 abstract class Model extends Controller {
 
 	/**
@@ -19,10 +21,9 @@ abstract class Model extends Controller {
 	/**
 	 * create a new instance of the database helper
 	 */
-	public function __construct(){
-
+	public function __construct()
+	{
 		//connect to PDO here.
-		$this->_db = \helpers\database::get();
-
+		$this->_db = Database::get();
 	}
 }
