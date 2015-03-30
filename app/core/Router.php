@@ -1,14 +1,10 @@
-<?php namespace core;
+<?php
+namespace core;
 
-/*
- * Router - routing urls to closurs and controllers - modified from https://github.com/NoahBuscher/Macaw
- *
- * @author David Carr - dave@daveismyname.com - http://www.daveismyname.com
- * @version 2.2
- * @date Auguest 16th, 2014
- */
-class Router {
+use controllers\Administration;
 
+class Router
+{
 	// Fallback for auto dispatching feature.
 	public static $fallback = false;
 
@@ -54,7 +50,7 @@ class Router {
 
 	/**
 	 * Don't load any further routes on match
-	 * @param  boolean $flag 
+	 * @param  boolean $flag
 	 */
 	public static function haltOnMatch($flag = true){
 		self::$halts = $flag;
@@ -63,21 +59,22 @@ class Router {
 	/**
 	 * Call object and instantiate
 	 *
-	 * @param  object $callback 
+	 * @param  object $callback
 	 * @param  array $matched  array of matched parameters
-	 * @param  string $msg      
+	 * @param  string $msg
 	 */
-	public static function invokeObject($callback,$matched = null,$msg = null){
-
+	public static function invokeObject($callback,$matched = null,$msg = null)
+	{
 		//grab all parts based on a / separator and collect the last index of the array
 		$last = explode('/',$callback);
 		$last = end($last);
 
 		//grab the controller name and method call
-		$segments = explode('@',$last);                         
+		$segments = explode('@',$last);
+		$segment = ucfirst($segments[0]);
 
 		//instanitate controller with optional msg (used for error_callback)
-		$controller = new $segments[0]($msg);
+		$controller = new $segment($msg);
 
 		if($matched == null){
 
@@ -88,7 +85,7 @@ class Router {
 
 			//call method and pass in array keys as params
 			call_user_func_array(array($controller, $segments[1]), $matched);
-		
+
 		}
 	}
 
@@ -104,7 +101,7 @@ class Router {
 
 		$controller = $uri !== ''      && isset($parts[0])  ? $parts[0] : DEFAULT_CONTROLLER;
 		$method     = $uri !== ''      && isset($parts[1])  ? $parts[1] : DEFAULT_METHOD;
-		$args       = is_array($parts) && count($parts) > 2 ? array_slice($parts, 2) : array(); 
+		$args       = is_array($parts) && count($parts) > 2 ? array_slice($parts, 2) : array();
 
 		$char_position = strpos($controller,'&');
 		if ($char_position > 0 ) {
@@ -135,7 +132,7 @@ class Router {
 		$c = new $controller;
 
 		if (method_exists($c, $method)) {
-			
+
 			$c->$method($args);
 			//found method so stop
 			return true;
@@ -151,12 +148,12 @@ class Router {
 	public static function dispatch(){
 
 		$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-		$method = $_SERVER['REQUEST_METHOD'];  
+		$method = $_SERVER['REQUEST_METHOD'];
 
 		$searches = array_keys(static::$patterns);
 		$replaces = array_values(static::$patterns);
 
-		self::$routes = str_replace('//','/',self::$routes);   
+		self::$routes = str_replace('//','/',self::$routes);
 
 		$found_route = false;
 
@@ -189,14 +186,14 @@ class Router {
 				if (self::$methods[$route] == $method || self::$methods[$route] == 'ANY') {
 					$found_route = true;
 
-					//if route is not an object 
+					//if route is not an object
 					if(!is_object(self::$callbacks[$route])){
 
 						//call object controller and method
 						self::invokeObject(self::$callbacks[$route]);
 						if (self::$halts) return;
 
-					} else { 
+					} else {
 
 						//call closure
 						call_user_func(self::$callbacks[$route]);
@@ -225,7 +222,7 @@ class Router {
 				if (preg_match('#^' . $route . '$#', $uri, $matched)) {
 
 					if (self::$methods[$pos] == $method || self::$methods[$pos] == 'ANY') {
-						$found_route = true; 
+						$found_route = true;
 
 						//remove $matched[0] as [1] is the first parameter.
 						array_shift($matched);
@@ -263,7 +260,7 @@ class Router {
 					header($_SERVER['SERVER_PROTOCOL']." 404 Not Found");
 					echo '404';
 				};
-			} 
+			}
 
 			if(!is_object(self::$error_callback)){
 
@@ -273,7 +270,7 @@ class Router {
 
 			} else {
 
-				call_user_func(self::$error_callback); 
+				call_user_func(self::$error_callback);
 				if (self::$halts) return;
 
 			}

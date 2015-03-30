@@ -2,7 +2,7 @@
 </div>
 
 <!-- JS -->
-<?php helpers\assets::js(helpers\url::template_path() . 'js/jquery.js') ?>
+<?php helpers\Assets::js(helpers\Url::template_path() . 'js/jquery.js') ?>
 
 </body>
 </html>

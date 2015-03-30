@@ -1,14 +1,8 @@
-<?php namespace core;
+<?php
+namespace core;
 
-/*
- * Language - simple language handler
- *
- * @author Bartek Kuśmierczuk - contact@qsma.pl - http://qsma.pl
- * @version 2.1
- * @date November 18, 2014
- */
-class Language {
-
+class Language
+{
 	/**
 	 * Variable holds array with language
 	 * @var array
@@ -34,7 +28,7 @@ class Language {
 		} else {
 
 			// display error
-			echo \core\error::display("Could not load language file '$code/$name.php'");
+			echo Error::display("Could not load language file '$code/$name.php'");
 			die;
 
 		}
@@ -77,7 +71,7 @@ class Language {
 		} else {
 
 			// display error
-			echo \core\error::display("Could not load language file '$code/$name.php'");
+			echo Error::display("Could not load language file '$code/$name.php'");
 			die;
 
 		}
