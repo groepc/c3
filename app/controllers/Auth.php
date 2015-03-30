@@ -3,6 +3,7 @@ namespace controllers;
 
 use core\Controller;
 use core\View;
+use helpers\Password;
 use helpers\Session;
 use helpers\Url;
 use models\UserService;
@@ -37,6 +38,10 @@ class Auth extends Controller
 
 			$userService = new UserService();
 			$user = $userService->getUserByUsername($username);
+
+			if (!Password::verify($password, $user->getPassword())) {
+				die('wrong username or password');
+			}
 
 			Session::set('login', true);
 			Session::set('username', $username);
