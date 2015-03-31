@@ -44,13 +44,18 @@ class Auth extends Controller
 			}
 
 			Session::set('login', true);
-			Session::set('username', $username);
+			Session::set('id', $user->getId());
+			Session::set('username', $user->getUsername());
+			Session::set('firstname', $user->getFirstname());
+			Session::set('middlename', $user->getMiddlename());
+			Session::set('lastname', $user->getLastname());
+
 			Url::redirect('administration');
 		}
 
-		View::rendertemplate('header');
-		View::render('auth/login');
-		View::rendertemplate('footer');
+		$data['title'] = 'Login';
+
+		View::render('auth/login', $data);
 	}
 
 	public function logout()

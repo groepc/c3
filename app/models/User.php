@@ -185,4 +185,9 @@ class User extends Model
 
         return $this;
     }
+
+    public function getFullname()
+    {
+        return $this->firstname.' '.$this->middlename.' '.$this->lastname;
+    }
 }

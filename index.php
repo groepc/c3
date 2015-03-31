@@ -64,7 +64,13 @@ new Config();
 
 //define routes
 Router::any('', '\controllers\Administration@index');
+
 Router::any('administration', '\controllers\Administration@index');
+Router::any('administration/plan-exam', '\controllers\Administration@planExam');
+Router::any('administration/prepare-exam', '\controllers\Administration@prepareExam');
+Router::any('administration/evaluate-exam', '\controllers\Administration@evaluateExam');
+Router::any('administration/management-reporting', '\controllers\Administration@managementReporting');
+
 Router::any('auth', '\controllers\Auth@index');
 Router::any('auth/login', '\controllers\Auth@login');
 Router::any('auth/logout', '\controllers\Auth@logout');

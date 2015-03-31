@@ -1,6 +1,3 @@
-
 <div class="page-header">
-	<h1>Administration</h1>
+	<h1><?=$data['title']?></h1>
 </div>
-
-<p>TEST</p>
