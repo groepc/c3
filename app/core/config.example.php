@@ -1,4 +1,8 @@
-<?php namespace core;
+<?php
+
+namespace core;
+
+use helpers\Session;
 
 /*
  * config - an example for setting up system settings
@@ -20,7 +24,7 @@ class Config {
 		define('DIR', 'http://example.com/');
 
 		//set default controller and method for legacy calls
-		define('DEFAULT_CONTROLLER', 'welcome');
+        define('DEFAULT_CONTROLLER', 'Administration');
 		define('DEFAULT_METHOD' , 'index');
 
 		//set a default language
@@ -38,7 +42,7 @@ class Config {
 		define('SESSION_PREFIX', 'smvc_');
 
 		//optionall create a constant for the name of the site
-		define('SITETITLE', 'V2.1');
+        define('SITETITLE', 'Administratie');
 
 		//turn on custom error handling
 		set_exception_handler('core\logger::exception_handler');
@@ -48,10 +52,10 @@ class Config {
 		date_default_timezone_set('Europe/London');
 
 		//start sessions
-		\helpers\session::init();
+		Session::init();
 
 		//set the default template
-		\helpers\session::set('template', 'default');
+		Session::set('template', 'default');
 	}
 
 }
