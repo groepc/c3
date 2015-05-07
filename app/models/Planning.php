@@ -11,6 +11,7 @@ class Planning extends Model
     private $userId;
     private $roomCode;
     private $user;
+    private $exam;
 
     public function __construct()
     {
@@ -122,7 +123,7 @@ class Planning extends Model
     }
 
     /**
-     * @return mixed
+     * @return User
      */
     public function getUser()
     {
@@ -136,6 +137,25 @@ class Planning extends Model
     public function setUser($user)
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Exam
+     */
+    public function getExam()
+    {
+        return $this->exam;
+    }
+
+    /**
+     * @param $exam
+     * @return $this
+     */
+    public function setExam($exam)
+    {
+        $this->exam = $exam;
 
         return $this;
     }

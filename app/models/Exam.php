@@ -143,7 +143,7 @@ class Exam extends Model
     }
 
     /**
-     * @return mixed
+     * @return User
      */
     public function getUser()
     {

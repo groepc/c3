@@ -1,6 +1,31 @@
-
 <div class="page-header">
-	<h1>Administratie Management Rapportages</h1>
+    <h1><?=$data['title']?></h1>
 </div>
 
-<p>TEST</p>
+<div class="panel panel-default">
+    <div class="panel-heading">Periodes</div>
+    <div class="panel-body">
+        <table class="table table-hover table-striped">
+            <thead>
+            <tr>
+                <th>Periode</th>
+                <th class="text-right">Aantal Tentamens</th>
+                <th class="text-right">Aantal Studenten</th>
+                <th class="text-right">Ingeschreven Studenten</th>
+                <th class="text-right">Gemiddeld Cijfer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <? foreach ($data['reporting'] as $report): ?>
+                <tr>
+                    <td><?=$report['period']?></td>
+                    <td class="text-right"><?=$report['examCount']?></td>
+                    <td class="text-right"><?=$report['studentCount']?></td>
+                    <td class="text-right"><?=$report['studentCount']?></td>
+                    <td class="text-right">7.2</td>
+                </tr>
+            <? endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>

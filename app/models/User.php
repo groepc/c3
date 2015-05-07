@@ -33,6 +33,10 @@ class User extends Model
      * @var string
      */
     private $gender;
+    /**
+     * @var int
+     */
+    private $roleId;
 
     public function __construct()
     {
@@ -44,13 +48,14 @@ class User extends Model
      */
     public function setData($data)
     {
-        $this->id = $data->id;
+        $this->id = $data->ID;
         $this->username = $data->gebruikersnaam;
         $this->password = $data->wachtwoord;
         $this->firstname = $data->voornaam;
         $this->middlename = $data->tussenvoegsel;
         $this->lastname = $data->achternaam;
         $this->gender = $data->geslacht;
+        $this->roleId = $data->rolID;
     }
 
     /**
@@ -58,7 +63,7 @@ class User extends Model
      */
     public function getId()
     {
-        return $this->id;
+        return (int)$this->id;
     }
 
     /**
@@ -182,6 +187,18 @@ class User extends Model
     public function setGender($gender)
     {
         $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getRoleId()
+    {
+        return $this->roleId;
+    }
+
+    public function setRoleId($id)
+    {
+        $this->roleId = $id;
 
         return $this;
     }

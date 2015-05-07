@@ -6,6 +6,7 @@ use core\View;
 use helpers\Password;
 use helpers\Session;
 use helpers\Url;
+use models\Role;
 use models\UserService;
 
 class Auth extends Controller
@@ -43,12 +44,13 @@ class Auth extends Controller
 				die('wrong username or password');
 			}
 
+			if ((int)$user->getRoleId() !== Role::ROLE_ADMINISTRATION) {
+				die('Not allowed, wrong permissions');
+			}
+
 			Session::set('login', true);
-			Session::set('id', $user->getId());
-			Session::set('username', $user->getUsername());
-			Session::set('firstname', $user->getFirstname());
-			Session::set('middlename', $user->getMiddlename());
-			Session::set('lastname', $user->getLastname());
+			Session::set('userid', $user->getId());
+			Session::set('fullname', $user->getFullname());
 
 			Url::redirect('administration');
 		}
