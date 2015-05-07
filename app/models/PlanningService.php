@@ -61,6 +61,8 @@ class PlanningService extends Model
         $data['tentamencode'] = $planningData['examCode'];
         $data['gebruikerID'] = $planningData['userId'];
         $data['lokaalCode'] = $planningData['roomCode'];
+        $data['created_at'] = date('Y-m-d H:i:s');
+        $data['updated_at'] = date('Y-m-d H:i:s');
 
         return $this->_db->insert('planning', $data);
     }

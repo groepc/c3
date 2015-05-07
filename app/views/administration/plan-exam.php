@@ -185,6 +185,7 @@
                 <div class="modal-footer">
                     <form class="form-horizontal" method="post" action="">
                         <input type="hidden" name="planningId" value="<?=$planning->getId()?>">
+                        <input type="hidden" name="examCode" value="<?=$planning->getExamCode()?>">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
                         <button type="submit" name="delete" class="btn btn-danger">Verwijderen</button>
                     </form>

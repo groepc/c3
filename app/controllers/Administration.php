@@ -58,17 +58,18 @@ class Administration extends Controller
 
 			$insertId = $this->planningService->createPlanning($planningData);
 
-			$this->data['message'] = 'Tentamen '.$planningData['examCode'].' is nu ingepland onder insertId: '.$insertId;
+			$this->data['message'] = 'Tentamen '.$planningData['examCode'].' is nu ingepland op '.$planningData['dateTime'];
 		}
 
 		if (isset($_POST['delete'])) {
 			$planningData = array(
 				'planningId' => $_POST['planningId'],
+                'examCode' => $_POST['examCode'],
 			);
 
 			$this->planningService->deletePlanning($planningData);
 
-			$this->data['message'] = 'Planning #'.$planningData['planningId'].' is verwijderd';
+			$this->data['message'] = 'Planning #'.$planningData['planningId'].' met examen code '.$planningData['examCode'].' is verwijderd';
 		}
 
         $this->data['title'] = 'Planning Tentamens';
