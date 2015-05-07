@@ -146,9 +146,9 @@
                                 <? foreach ($data['rooms'] as $room): ?>
                                     <? if ($exam->getStudentAmount() <= $room->getSeats()): ?>
                                         <? if ($room->getComputerRoom()): ?>
-                                            <option><?=$room->getCode()?> [<?=$room->getSeats()?>] (Computer)</option>
+                                            <option value="<?=$room->getCode()?>"><?=$room->getCode()?> [<?=$room->getSeats()?>] (Computer)</option>
                                         <? else: ?>
-                                            <option><?=$room->getCode()?> [<?=$room->getSeats()?>]</option>
+                                            <option value="<?=$room->getCode()?>"><?=$room->getCode()?> [<?=$room->getSeats()?>]</option>
                                         <? endif; ?>
                                     <? endif; ?>
                                 <? endforeach; ?>
