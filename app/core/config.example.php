@@ -45,8 +45,8 @@ class Config {
         define('SITETITLE', 'Administratie');
 
 		//turn on custom error handling
-		set_exception_handler('core\logger::exception_handler');
-		set_error_handler('core\logger::error_handler');
+		set_exception_handler('core\Logger::exception_handler');
+		set_error_handler('core\Logger::error_handler');
 
 		//set timezone
 		date_default_timezone_set('Europe/London');
@@ -55,7 +55,7 @@ class Config {
 		Session::init();
 
 		//set the default template
-		Session::set('template', 'default');
+		Session::set('template', 'avans');
 	}
 
 }
