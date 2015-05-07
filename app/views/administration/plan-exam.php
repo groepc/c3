@@ -145,11 +145,10 @@
                                 <? /** @var \models\Room $room */ ?>
                                 <? foreach ($data['rooms'] as $room): ?>
                                     <? if ($exam->getStudentAmount() <= $room->getSeats()): ?>
-                                        <? if ($exam->getComputerRoom() && $room->getComputerRoom()): ?>
-                                            <option><?=$room->getCode()?></option>
-                                        <? endif; ?>
-                                        <? if (!$exam->getComputerRoom() || !$room->getComputerRoom()): ?>
-                                            <option><?=$room->getCode()?></option>
+                                        <? if ($room->getComputerRoom()): ?>
+                                            <option><?=$room->getCode()?> [<?=$room->getSeats()?>] (Computer)</option>
+                                        <? else: ?>
+                                            <option><?=$room->getCode()?> [<?=$room->getSeats()?>]</option>
                                         <? endif; ?>
                                     <? endif; ?>
                                 <? endforeach; ?>

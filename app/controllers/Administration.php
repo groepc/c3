@@ -58,6 +58,10 @@ class Administration extends Controller
 
 			$insertId = $this->planningService->createPlanning($planningData);
 
+            if (!$insertId) {
+                $this->data['error'] = 'FOUT';
+            }
+
 			$this->data['message'] = 'Tentamen '.$planningData['examCode'].' is nu ingepland op '.$planningData['dateTime'];
 		}
 
