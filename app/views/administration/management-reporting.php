@@ -16,7 +16,7 @@
             </tr>
             </thead>
             <tbody>
-            <? foreach ($data['reporting'] as $report): ?>
+            <?php foreach ($data['reporting'] as $report): ?>
                 <tr>
                     <td><?=$report['period']?></td>
                     <td class="text-right"><?=$report['examCount']?></td>
@@ -24,7 +24,7 @@
                     <td class="text-right"><?=$report['studentCount']?></td>
                     <td class="text-right">7.2</td>
                 </tr>
-            <? endforeach; ?>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </div>

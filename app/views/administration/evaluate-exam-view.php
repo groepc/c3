@@ -2,8 +2,8 @@
 	<h1><?=$data['title']?></h1>
 </div>
 
-<? /** @var \models\Evaluation $eval */ ?>
-<? $eval = $data['evaluation']; ?>
+<?php /** @var \models\Evaluation $eval */ ?>
+<?php $eval = $data['evaluation']; ?>
 
 <div class="panel panel-default">
 	<div class="panel-heading">Evaluatie</div>
@@ -12,12 +12,12 @@
 			<div class="form-group">
 				<label for="datumtijd" class="col-sm-2 control-label">Datum</label>
 				<div class="col-sm-10">
-					<? if (!$eval->getDateTime()): ?>
+					<?php if (!$eval->getDateTime()): ?>
 						<input type="text" class="form-control" id="datumtijd" name="datumtijd" value="<?=date('Y-m-d', strtotime('now'))?>" readonly>
-					<? endif; ?>
-					<? if ($eval->getDateTime()): ?>
+					<?php endif; ?>
+					<?php if ($eval->getDateTime()): ?>
 						<input type="text" class="form-control" id="datumtijd" name="datumtijd" value="<?=$eval->getDateTime()?>" readonly>
-					<? endif; ?>
+					<?php endif; ?>
 				</div>
 			</div>
 			<div class="form-group">
@@ -29,21 +29,21 @@
 			<div class="form-group">
 				<label for="cijfer" class="col-sm-2 control-label">Cijfer</label>
 				<div class="col-sm-10">
-					<? if (!$eval->getGrade()): ?>
+					<?php if (!$eval->getGrade()): ?>
 						<input type="number" min="1" max="10" step="0.1" class="form-control" id="cijfer" name="cijfer" placeholder="Cijfer" required>
-					<? endif; ?>
-					<? if ($eval->getGrade()): ?>
+					<?php endif; ?>
+					<?php if ($eval->getGrade()): ?>
 						<input type="number" min="1" max="10" step="0.1" class="form-control" id="cijfer" name="cijfer" value="<?=$eval->getGrade()?>" required>
-					<? endif; ?>
+					<?php endif; ?>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="examStudents" class="col-sm-2 control-label">Opmerkingen</label>
 				<div class="col-sm-10">
-					<? $comment = ''?>
-					<? if ($eval->getComment()): ?>
-						<? $comment = $eval->getComment() ?>
-					<? endif; ?>
+					<?php $comment = ''?>
+					<?php if ($eval->getComment()): ?>
+						<?php $comment = $eval->getComment() ?>
+					<?php endif; ?>
 					<textarea name="document" id="" cols="30" rows="10" class="form-control"><?=$comment?></textarea>
 				</div>
 			</div>

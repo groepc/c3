@@ -17,8 +17,8 @@
             </tr>
             </thead>
             <tbody>
-            <? /** @var \models\Planning $planning */ ?>
-            <? foreach ($data['planning'] as $planning): ?>
+            <?php /** @var \models\Planning $planning */ ?>
+            <?php foreach ($data['planning'] as $planning): ?>
                 <tr>
                     <td><?=$planning->getDateTime()?></td>
                     <td><?=$planning->getRoomCode()?></td>
@@ -27,7 +27,7 @@
                     <td class="text-right"><?=$planning->getExam()->getPeriod()?></td>
                     <td class="text-right"><button type="button" class="btn btn-success btn-xs">bekijken</button></td>
                 </tr>
-            <? endforeach; ?>
+            <?php endforeach; ?>
             </tbody>
         </table>
 

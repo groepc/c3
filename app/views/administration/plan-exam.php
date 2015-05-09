@@ -2,9 +2,9 @@
 	<h1><?=$data['title']?></h1>
 </div>
 
-<? if (isset($data['message'])): ?>
+<?php if (isset($data['message'])): ?>
     <div class="alert alert-success" role="alert"><?=$data['message']?></div>
-<? endif; ?>
+<?php endif; ?>
 
 <div class="row">
     <div class="col-lg-6">
@@ -21,15 +21,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <? /** @var \models\Exam $exam */ ?>
-                    <? foreach ($data['exams'] as $exam): ?>
+                    <?php /** @var \models\Exam $exam */ ?>
+                    <?php foreach ($data['exams'] as $exam): ?>
                         <tr>
                             <td><?=$exam->getCode()?></td>
                             <td class="text-right"><?=$exam->getPeriod()?></td>
                             <td class="text-right"><?=$exam->getStudentAmount()?></td>
                             <td class="text-right"><button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#planExam_<?=$exam->getCode()?>">inplannen</button></td>
                         </tr>
-                    <? endforeach; ?>
+                    <?php endforeach; ?>
                     </tbody>
                 </table>
 
@@ -67,8 +67,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <? /** @var \models\Planning $planning */ ?>
-                    <? foreach ($data['plannings'] as $planning): ?>
+                    <?php /** @var \models\Planning $planning */ ?>
+                    <?php foreach ($data['plannings'] as $planning): ?>
                         <tr>
                             <td><?=$planning->getDateTime()?></td>
                             <td><?=$planning->getExamCode()?></td>
@@ -78,7 +78,7 @@
                                 <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePlanning_<?=$planning->getId()?>">verwijderen</button>
                             </td>
                         </tr>
-                    <? endforeach; ?>
+                    <?php endforeach; ?>
                     </tbody>
                 </table>
 
@@ -102,8 +102,8 @@
     </div>
 </div>
 
-<? /** @var \models\Exam $exam */ ?>
-<? foreach ($data['exams'] as $exam): ?>
+<?php /** @var \models\Exam $exam */ ?>
+<?php foreach ($data['exams'] as $exam): ?>
     <!-- Modal -->
     <div class="modal fade" id="planExam_<?=$exam->getCode()?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -142,16 +142,16 @@
                             <label for="planningRoom" class="col-sm-2 control-label">Lokaal</label>
                             <div class="col-sm-10">
                                 <select class="form-control" id="planningRoom" name="planningRoom" required>
-                                <? /** @var \models\Room $room */ ?>
-                                <? foreach ($data['rooms'] as $room): ?>
-                                    <? if ($exam->getStudentAmount() <= $room->getSeats()): ?>
-                                        <? if ($room->getComputerRoom()): ?>
+                                <?php /** @var \models\Room $room */ ?>
+                                <?php foreach ($data['rooms'] as $room): ?>
+                                    <?php if ($exam->getStudentAmount() <= $room->getSeats()): ?>
+                                        <?php if ($room->getComputerRoom()): ?>
                                             <option value="<?=$room->getCode()?>"><?=$room->getCode()?> [<?=$room->getSeats()?>] (Computer)</option>
-                                        <? else: ?>
+                                        <?php else: ?>
                                             <option value="<?=$room->getCode()?>"><?=$room->getCode()?> [<?=$room->getSeats()?>]</option>
-                                        <? endif; ?>
-                                    <? endif; ?>
-                                <? endforeach; ?>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -166,10 +166,10 @@
             </div>
         </div>
     </div>
-<? endforeach; ?>
+<?php endforeach; ?>
 
-<? /** @var \models\Planning $planning */ ?>
-<? foreach ($data['plannings'] as $planning): ?>
+<?php /** @var \models\Planning $planning */ ?>
+<?php foreach ($data['plannings'] as $planning): ?>
     <!-- Modal -->
     <div class="modal fade" id="deletePlanning_<?=$planning->getId()?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -192,4 +192,4 @@
             </div>
         </div>
     </div>
-<? endforeach; ?>
+<?php endforeach; ?>

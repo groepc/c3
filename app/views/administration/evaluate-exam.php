@@ -17,8 +17,8 @@
 				</tr>
 				</thead>
 				<tbody>
-				<? /** @var \models\Exam $exam */ ?>
-				<? foreach ($data['exams'] as $exam): ?>
+				<?php /** @var \models\Exam $exam */ ?>
+				<?php foreach ($data['exams'] as $exam): ?>
 					<tr>
 						<td><?=$exam->getCode()?></td>
 						<td><?=$exam->getCourse()?></td>
@@ -26,7 +26,7 @@
 						<td><?=$exam->getUser()->getFullname()?></td>
 						<td class="text-right"><a href="/administration/evaluate-exam-view?code=<?=$exam->getCode()?>"><button type="button" class="btn btn-success btn-xs">invullen</button></a></td>
 					</tr>
-				<? endforeach; ?>
+				<?php endforeach; ?>
 				</tbody>
 			</table>
 		</table>
