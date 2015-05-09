@@ -74,10 +74,18 @@ class Administration extends Controller {
             $this->data['message'] = 'Planning #' . $planningData['planningId'] . ' met examen code ' . $planningData['examCode'] . ' is verwijderd';
         }
 
+        try {
+            $exams = $this->examService->fetchExams(0,50);
+            $plannings = $this->planningService->fetchPlannings(0, 50);
+            $rooms = $this->roomService->fetchRooms();
+        } catch (\Exception $ex) {
+            var_dump($ex->getMessage()); exit;
+        }
+
         $this->data['title'] = 'Planning Tentamens';
-        $this->data['exams'] = $this->examService->fetchExams(0, 50);
-        $this->data['plannings'] = $this->planningService->fetchPlannings(0, 50);
-        $this->data['rooms'] = $this->roomService->fetchRooms();
+		$this->data['exams'] = $exams;
+        $this->data['plannings'] = $plannings;
+		$this->data['rooms'] = $rooms;
 
         View::rendertemplate('header', $this->data);
         View::render('administration/plan-exam', $this->data);
