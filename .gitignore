@@ -2,3 +2,4 @@ app/core/Config.php
 vendor
 .idea
 .DS_Store
+/nbproject/private/

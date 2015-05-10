@@ -44,7 +44,10 @@ class Administration extends Controller
     public function index()
     {
         $this->data['title'] = 'Dashboard';
-
+        $this->data['examsShort'] = $this->examService->fetchExams(0,5);
+        $this->data['prepareExamShort'] = $this->planningService->fetchPlannings(0, 5);
+        $this->data['evaluateExamShort'] = $this->examService->fetchExams(0, 5);
+        
         View::rendertemplate('header', $this->data);
         View::render('administration/index', $this->data);
         View::rendertemplate('footer');
