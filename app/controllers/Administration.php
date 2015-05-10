@@ -12,6 +12,7 @@ use models\Exam;
 use models\ExamService;
 use models\PlanningService;
 use models\RoomService;
+use models\SubscriptionService;
 
 class Administration extends Controller
 {
@@ -20,6 +21,7 @@ class Administration extends Controller
     private $planningService;
     private $evaluationService;
     private $roomService;
+    private $subscriptionService;
 
     public function __construct()
     {
@@ -34,6 +36,7 @@ class Administration extends Controller
         $this->planningService = new PlanningService();
         $this->evaluationService = new EvaluationService();
         $this->roomService = new RoomService();
+        $this->subscriptionService = new SubscriptionService();
 
         parent::__construct();
     }
@@ -103,6 +106,22 @@ class Administration extends Controller
 
         View::rendertemplate('header', $this->data);
         View::render('administration/prepare-exam', $this->data);
+        View::rendertemplate('footer');
+    }
+
+    public function prepareExamView()
+    {
+        if (!$_GET['planningId']) {
+            Url::redirect('administration/prepare-exam');
+        }
+
+        $planningId = $_GET['planningId'];
+
+        $this->data['title'] = 'Inschrijvingen';
+        $this->data['subscription'] = $this->subscriptionService->fetchSubscriptions($planningId);
+
+        View::rendertemplate('header', $this->data);
+        View::render('administration/prepare-exam-view', $this->data);
         View::rendertemplate('footer');
     }
 

@@ -117,6 +117,7 @@ class smtp
      *
      * @link http://en.wikipedia.org/wiki/Variable_envelope_return_path
      * @link http://www.postfix.org/VERP_README.html Info on VERP
+     *
      * @var bool
      */
     public $do_verp = false;
@@ -127,6 +128,7 @@ class smtp
      * This needs to be quite high to function correctly with hosts using greetdelay as an anti-spam measure.
      *
      * @link http://tools.ietf.org/html/rfc2821#section-4.5.3.2
+     *
      * @var int
      */
     public $Timeout = 300;

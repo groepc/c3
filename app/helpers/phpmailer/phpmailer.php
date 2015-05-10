@@ -144,6 +144,7 @@ class phpmailer
      *
      * @link http://sprain.ch/blog/downloads/php-class-easypeasyics-create-ical-files-with-php/
      * @link http://kigkonsult.se/iCalcreator/
+     *
      * @var string
      */
     public $Ical = '';
@@ -397,6 +398,7 @@ class phpmailer
      *
      * @link http://en.wikipedia.org/wiki/Variable_envelope_return_path
      * @link http://www.postfix.org/VERP_README.html Postfix VERP info
+     *
      * @var bool
      */
     public $do_verp = false;
@@ -413,6 +415,7 @@ class phpmailer
      *
      * @note The default remains "\n". We force CRLF where we know
      *        it must be used via self::CRLF.
+     *
      * @var string
      */
     public $LE = "\n";
@@ -444,6 +447,7 @@ class phpmailer
      * DKIM signing domain name.
      *
      * @example 'example.com'
+     *
      * @var string
      */
     public $DKIM_domain = '';

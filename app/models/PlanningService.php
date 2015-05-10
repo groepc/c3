@@ -6,6 +6,24 @@ use core\Model;
 
 class PlanningService extends Model
 {
+    public function fetchPlanningById($id)
+    {
+        $data = $this->_db->select('SELECT * FROM planning WHERE ID = :id', array(':id' => $id));
+
+        $planning = new Planning();
+        $planning->setData($data[0]);
+
+        $userService = new UserService();
+        $user = $userService->getUserById($planning->getUserId());
+        $planning->setUser($user);
+
+        $examService = new ExamService();
+        $exam = $examService->fetchExamByCode($planning->getExamCode());
+        $planning->setExam($exam);
+
+        return $planning;
+    }
+
     public function fetchPlanningByExamCode($code)
     {
         $data = $this->_db->select('SELECT * FROM planning WHERE tentamencode = :code', array(':code' => $code));
