@@ -28,4 +28,21 @@ class SubscriptionService extends Model
 
         return $subscriptionArray;
     }
+
+    public function completeGrades($planningId)
+    {
+        $subscriptions = $this->fetchSubscriptions($planningId);
+
+        /** @var Subscription $subscription */
+        foreach ($subscriptions as $subscription) {
+            if (!$subscription->getGrade()) {
+                $data['cijfer'] = 'N/A';
+                $where['planningID'] = $subscription->getPlanningId();
+                $where['gebruikerID'] = $subscription->getUserId();
+                $this->_db->update('inschrijving', $data, $where);
+            }
+        }
+
+        return true;
+    }
 }

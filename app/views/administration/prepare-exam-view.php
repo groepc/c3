@@ -2,6 +2,10 @@
     <h1><?=$data['title']?></h1>
 </div>
 
+<?php if (isset($data['message'])): ?>
+    <div class="alert alert-success" role="alert"><?=$data['message']?></div>
+<?php endif; ?>
+
 <div class="panel panel-default">
     <div class="panel-heading">Tentamen Info</div>
     <div class="panel-body">
@@ -18,6 +22,15 @@
                 <th>Datum</th><td><?=$planning->getDateTime()?></td>
             </tr>
         </table>
+
+        <p>
+            <a href="">
+                <button class="btn btn-primary">Afdrukken</button>
+            </a>
+            <form method="post" action="">
+                <button type="submit" name="process" class="btn btn-success">Verwerken</button>
+            </form>
+        </p>
     </div>
 </div>
 
