@@ -25,7 +25,7 @@
                     <td><?=$planning->getExamCode()?></td>
                     <td><?=$planning->getExam()->getCourse()?>
                     <td class="text-right"><?=$planning->getExam()->getPeriod()?></td>
-                    <td class="text-right"><button type="button" class="btn btn-success btn-xs">bekijken</button></td>
+                    <td class="text-right"><a href="/administration/prepare-exam-view?planningId=<?=$planning->getId()?>"<button type="button" class="btn btn-success btn-xs">bekijken</button></a></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

@@ -171,7 +171,7 @@ class Subscription extends Model
     }
 
     /**
-     * @return mixed
+     * @return User
      */
     public function getUser()
     {
@@ -179,11 +179,11 @@ class Subscription extends Model
     }
 
     /**
-     * @param $user
+     * @param User $user
      *
      * @return $this
      */
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
 
