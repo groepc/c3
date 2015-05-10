@@ -1,4 +1,5 @@
 <?php
+
 namespace models;
 
 use core\Model;
@@ -7,7 +8,7 @@ class ExamService extends Model
 {
     public function fetchExamByCode($code)
     {
-        $data = $this->_db->select("SELECT * FROM tentamen WHERE code = :code", array(':code' => $code));
+        $data = $this->_db->select('SELECT * FROM tentamen WHERE code = :code', array(':code' => $code));
 
         $exam = new Exam();
         $exam->setData($data[0]);
@@ -15,13 +16,12 @@ class ExamService extends Model
         return $exam;
     }
 
-    public function fetchExams($offset = 0, $amount= 100)
+    public function fetchExams($offset = 0, $amount = 100)
     {
-        $data = $this->_db->select("SELECT * FROM tentamen LIMIT :offset, :amount", array(':offset' => $offset, ':amount' => $amount));
+        $data = $this->_db->select('SELECT * FROM tentamen LIMIT :offset, :amount', array(':offset' => $offset, ':amount' => $amount));
 
         $examArray = array();
-        foreach ($data as $examData)
-        {
+        foreach ($data as $examData) {
             $exam = new Exam();
             $exam->setData($examData);
 
@@ -37,11 +37,11 @@ class ExamService extends Model
 
     public function getPeriods($offset = 0, $amount = 20)
     {
-        $data = $this->_db->select("SELECT periode FROM tentamen GROUP BY periode LIMIT :offset, :amount", array(':offset' => $offset, ':amount' => $amount));
+        $data = $this->_db->select('SELECT periode FROM tentamen GROUP BY periode LIMIT :offset, :amount', array(':offset' => $offset, ':amount' => $amount));
 
         $periods = array();
         foreach ($data as $row) {
-            $periods[] = (int)$row->periode;
+            $periods[] = (int) $row->periode;
         }
         rsort($periods);
 
@@ -50,11 +50,10 @@ class ExamService extends Model
 
     public function getExamByPeriod($period)
     {
-        $data = $this->_db->select("SELECT * FROM tentamen WHERE periode = :period", array(':period' => $period));
+        $data = $this->_db->select('SELECT * FROM tentamen WHERE periode = :period', array(':period' => $period));
 
         $examArray = array();
-        foreach ($data as $examData)
-        {
+        foreach ($data as $examData) {
             $exam = new Exam();
             $exam->setData($examData);
 

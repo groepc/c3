@@ -2,7 +2,7 @@
     <h1><?= $data['title'] ?></h1>
 </div>
 
-<?php /** @var \models\Evaluation $eval */ ?>
+<?php/** @var \models\Evaluation $eval */ ?>
 <?php $eval = $data['evaluation']; ?>
 
 <div class="panel panel-default">

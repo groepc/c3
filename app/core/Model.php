@@ -1,4 +1,6 @@
-<?php namespace core;
+<?php
+
+namespace core;
 
 /*
  * model - the base model
@@ -10,20 +12,21 @@
 
 use helpers\Database;
 
-abstract class Model extends Controller {
+abstract class Model extends Controller
+{
+    /**
+     * hold the database connection.
+     *
+     * @var object
+     */
+    protected $_db;
 
-	/**
-	 * hold the database connection
-	 * @var object
-	 */
-	protected $_db;
-	
-	/**
-	 * create a new instance of the database helper
-	 */
-	public function __construct()
-	{
-		//connect to PDO here.
-		$this->_db = Database::get();
-	}
+    /**
+     * create a new instance of the database helper.
+     */
+    public function __construct()
+    {
+        //connect to PDO here.
+        $this->_db = Database::get();
+    }
 }

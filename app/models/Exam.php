@@ -1,4 +1,5 @@
 <?php
+
 namespace models;
 
 use core\Model;
@@ -152,6 +153,7 @@ class Exam extends Model
 
     /**
      * @param $user
+     *
      * @return $this
      */
     public function setUser($user)

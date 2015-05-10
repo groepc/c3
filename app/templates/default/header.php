@@ -8,11 +8,11 @@
 
 	<!-- CSS -->
 	<?php
-		helpers\Assets::css(array(
-			'//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css',
-			helpers\Url::template_path() . 'css/style.css',
-		))
-	?>
+        helpers\Assets::css(array(
+            '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css',
+            helpers\Url::template_path().'css/style.css',
+        ))
+    ?>
 
 </head>
 <body>

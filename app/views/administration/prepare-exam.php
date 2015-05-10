@@ -17,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            <?php /** @var \models\Planning $planning */ ?>
+            <?php/** @var \models\Planning $planning */ ?>
             <?php foreach ($data['planning'] as $planning): ?>
                 <tr>
                     <td><?=$planning->getDateTime()?></td>

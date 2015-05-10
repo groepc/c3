@@ -17,7 +17,7 @@
 				</tr>
 				</thead>
 				<tbody>
-				<?php /** @var \models\Exam $exam */ ?>
+				<?php/** @var \models\Exam $exam */ ?>
 				<?php foreach ($data['exams'] as $exam): ?>
 					<tr>
 						<td><?=$exam->getCode()?></td>

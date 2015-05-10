@@ -1,4 +1,5 @@
 <?php
+
 namespace models;
 
 use core\Model;
@@ -42,6 +43,7 @@ class Evaluation extends Model
 
     /**
      * @param $id
+     *
      * @return $this
      */
     public function setId($id)
@@ -61,6 +63,7 @@ class Evaluation extends Model
 
     /**
      * @param $dateTime
+     *
      * @return $this
      */
     public function setDateTime($dateTime)
@@ -80,6 +83,7 @@ class Evaluation extends Model
 
     /**
      * @param $grade
+     *
      * @return $this
      */
     public function setGrade($grade)
@@ -99,6 +103,7 @@ class Evaluation extends Model
 
     /**
      * @param $comment
+     *
      * @return $this
      */
     public function setComment($comment)
@@ -118,6 +123,7 @@ class Evaluation extends Model
 
     /**
      * @param $examCode
+     *
      * @return $this
      */
     public function setExamCode($examCode)
@@ -137,6 +143,7 @@ class Evaluation extends Model
 
     /**
      * @param $userId
+     *
      * @return $this
      */
     public function setUserId($userId)

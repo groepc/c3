@@ -1,4 +1,5 @@
 <?php
+
 namespace models;
 
 use core\Model;
@@ -7,11 +8,10 @@ class PlanningService extends Model
 {
     public function fetchPlanningByExamCode($code)
     {
-        $data = $this->_db->select("SELECT * FROM planning WHERE tentamencode = :code", array(':code' => $code));
+        $data = $this->_db->select('SELECT * FROM planning WHERE tentamencode = :code', array(':code' => $code));
 
         $planningArray = array();
-        foreach ($data as $planningData)
-        {
+        foreach ($data as $planningData) {
             $planning = new Planning();
             $planning->setData($planningData);
 
@@ -29,13 +29,12 @@ class PlanningService extends Model
         return $planningArray;
     }
 
-    public function fetchPlannings($offset = 0, $amount= 100)
+    public function fetchPlannings($offset = 0, $amount = 100)
     {
-        $data = $this->_db->select("SELECT * FROM planning LIMIT :offset, :amount", array(':offset' => $offset, ':amount' => $amount));
+        $data = $this->_db->select('SELECT * FROM planning LIMIT :offset, :amount', array(':offset' => $offset, ':amount' => $amount));
 
         $planningArray = array();
-        foreach ($data as $planningData)
-        {
+        foreach ($data as $planningData) {
             $planning = new Planning();
             $planning->setData($planningData);
 

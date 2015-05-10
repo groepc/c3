@@ -1,4 +1,5 @@
 <?php
+
 namespace controllers;
 
 use core\Controller;
@@ -11,58 +12,58 @@ use models\UserService;
 
 class Auth extends Controller
 {
-	/**
-	 * Call the parent construct
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
-	public function index()
-	{
-		Url::redirect('auth/login');
-	}
-
-	/**
-	 * Define Index page title and load template files
-	 */
-	public function login()
+    /**
+     * Call the parent construct.
+     */
+    public function __construct()
     {
-		if (Session::get('login') == true) {
-			Url::redirect('administration');
-		}
+        parent::__construct();
+    }
 
-		if (isset($_POST['submit'])) {
-			$username = $_POST['username'];
-			$password = $_POST['password'];
+    public function index()
+    {
+        Url::redirect('auth/login');
+    }
 
-			$userService = new UserService();
-			$user = $userService->getUserByUsername($username);
+    /**
+     * Define Index page title and load template files.
+     */
+    public function login()
+    {
+        if (Session::get('login') == true) {
+            Url::redirect('administration');
+        }
 
-			if (!Password::verify($password, $user->getPassword())) {
-				die('wrong username or password');
-			}
+        if (isset($_POST['submit'])) {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
 
-			if ((int)$user->getRoleId() !== Role::ROLE_ADMINISTRATION) {
-				die('Not allowed, wrong permissions');
-			}
+            $userService = new UserService();
+            $user = $userService->getUserByUsername($username);
 
-			Session::set('login', true);
-			Session::set('userid', $user->getId());
-			Session::set('fullname', $user->getFullname());
+            if (!Password::verify($password, $user->getPassword())) {
+                die('wrong username or password');
+            }
 
-			Url::redirect('administration');
-		}
+            if ((int) $user->getRoleId() !== Role::ROLE_ADMINISTRATION) {
+                die('Not allowed, wrong permissions');
+            }
 
-		$data['title'] = 'Login';
+            Session::set('login', true);
+            Session::set('userid', $user->getId());
+            Session::set('fullname', $user->getFullname());
 
-		View::render('auth/login', $data);
-	}
+            Url::redirect('administration');
+        }
 
-	public function logout()
-	{
-		Session::destroy();
-		Url::redirect('administration');
-	}
+        $data['title'] = 'Login';
+
+        View::render('auth/login', $data);
+    }
+
+    public function logout()
+    {
+        Session::destroy();
+        Url::redirect('administration');
+    }
 }

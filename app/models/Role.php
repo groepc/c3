@@ -1,4 +1,5 @@
 <?php
+
 namespace models;
 
 use core\Model;
@@ -33,6 +34,7 @@ class Role extends Model
 
     /**
      * @param $id
+     *
      * @return $this
      */
     public function setId($id)
@@ -52,6 +54,7 @@ class Role extends Model
 
     /**
      * @param $name
+     *
      * @return $this
      */
     public function setName($name)

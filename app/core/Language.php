@@ -1,87 +1,89 @@
 <?php
+
 namespace core;
 
 class Language
 {
-	/**
-	 * Variable holds array with language
-	 * @var array
-	 */
-	private $_array;
+    /**
+     * Variable holds array with language.
+     *
+     * @var array
+     */
+    private $_array;
 
-	/**
-	 * Load language function
-	 * @param  string $name
-	 * @param  string $code
-	 */
-	public function load($name, $code = LANGUAGE_CODE) {
-		
-		// lang file
-		$file = "app/language/$code/$name.php";
+    /**
+     * Load language function.
+     *
+     * @param string $name
+     * @param string $code
+     */
+    public function load($name, $code = LANGUAGE_CODE)
+    {
 
-		// check if is readable
-		if(is_readable($file)){
+        // lang file
+        $file = "app/language/$code/$name.php";
 
-			// require file
-			$this->_array = include($file);
+        // check if is readable
+        if (is_readable($file)) {
 
-		} else {
+            // require file
+            $this->_array = include $file;
+        } else {
 
-			// display error
-			echo Error::display("Could not load language file '$code/$name.php'");
-			die;
+            // display error
+            echo Error::display("Could not load language file '$code/$name.php'");
+            die;
+        }
+    }
 
-		}
+    /**
+     * Get element from language array by key.
+     *
+     * @param string $value
+     *
+     * @return string
+     */
+    public function get($value)
+    {
+        if (!empty($this->_array[$value])) {
+            return $this->_array[$value];
+        } else {
+            return $value;
+        }
+    }
 
-	}
+    /**
+     * Get lang for views.
+     *
+     * @param string $value this is "word" value from language file
+     * @param string $name  name of file with language
+     * @param string $code  optional, language code
+     *
+     * @return string
+     */
+    public function show($value, $name, $code = LANGUAGE_CODE)
+    {
 
-	/**
-	 * Get element from language array by key
-	 * @param  string $value
-	 * @return string
-	 */
-	public function get($value) {
+        // lang file
+        $file = "app/language/$code/$name.php";
 
-		if(!empty($this->_array[$value])){
-			return $this->_array[$value];
-		} else {
-			return $value;
-		}
+        // check if is readable
+        if (is_readable($file)) {
 
-	}
+            // require file
+            $_array = include $file;
+        } else {
 
-	/**
-	 * Get lang for views
-	 * @param  string $value this is "word" value from language file
-	 * @param  string $name  name of file with language
-	 * @param  string $code  optional, language code
-	 * @return string
-	 */
-	public function show($value, $name, $code = LANGUAGE_CODE) {
-		
-		// lang file
-		$file = "app/language/$code/$name.php";
+            // display error
+            echo Error::display("Could not load language file '$code/$name.php'");
+            die;
+        }
 
-		// check if is readable
-		if(is_readable($file)){
-
-			// require file
-			$_array = include($file);
-
-		} else {
-
-			// display error
-			echo Error::display("Could not load language file '$code/$name.php'");
-			die;
-
-		}
-
-		// If 
-		if(!empty($_array[$value])){
-			return $_array[$value];
-		} else {
-			return $value;
-		}
-	}
-
+        // If
+        if (!empty($_array[$value])) {
+            return $_array[$value];
+        } else {
+            return $value;
+        }
+    }
 }
