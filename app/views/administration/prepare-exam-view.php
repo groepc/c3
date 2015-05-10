@@ -3,6 +3,25 @@
 </div>
 
 <div class="panel panel-default">
+    <div class="panel-heading">Tentamen Info</div>
+    <div class="panel-body">
+        <table class="table">
+            <?php /** @var \models\Planning $planning */ ?>
+            <?php $planning = $data['planning']; ?>
+            <tr>
+                <th>Code</th><td><?=$planning->getExamCode()?></td>
+            <tr></tr>
+                <th>Vak</th><td><?=$planning->getExam()->getCourse()?></td>
+            <tr></tr>
+                <th>Lokaal</th><td><?=$planning->getRoomCode()?></td>
+            <tr></tr>
+                <th>Datum</th><td><?=$planning->getDateTime()?></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="panel panel-default">
     <div class="panel-heading">Inschrijvingen</div>
     <div class="panel-body">
         <table class="table table-hover table-striped">
