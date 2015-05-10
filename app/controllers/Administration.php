@@ -117,6 +117,12 @@ class Administration extends Controller
 
         $planningId = $_GET['planningId'];
 
+        if (isset($_POST['process'])) {
+            $this->subscriptionService->completeGrades($planningId);
+
+            $this->data['message'] = 'Inschrijvingen met planning\'s id: '.$planningId.' is verwerkt.';
+        }
+
         $this->data['title'] = 'Inschrijvingen';
         $this->data['planning'] = $this->planningService->fetchPlanningById($planningId);
         $this->data['subscription'] = $this->subscriptionService->fetchSubscriptions($planningId);
