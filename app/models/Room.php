@@ -1,4 +1,5 @@
 <?php
+
 namespace models;
 
 use core\Model;
@@ -31,6 +32,7 @@ class Room extends Model
 
     /**
      * @param $code
+     *
      * @return $this
      */
     public function setCode($code)
@@ -50,6 +52,7 @@ class Room extends Model
 
     /**
      * @param $seats
+     *
      * @return $this
      */
     public function setSeats($seats)
@@ -69,6 +72,7 @@ class Room extends Model
 
     /**
      * @param $computerRoom
+     *
      * @return $this
      */
     public function setComputerRoom($computerRoom)

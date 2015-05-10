@@ -3,17 +3,17 @@
 use core\Config;
 use core\Router;
 
-if(file_exists('vendor/autoload.php')){
-	require 'vendor/autoload.php';
+if (file_exists('vendor/autoload.php')) {
+    require 'vendor/autoload.php';
 } else {
-	echo "<h1>Please install via composer.json</h1>";
-	echo "<p>Install Composer instructions: <a href='https://getcomposer.org/doc/00-intro.md#globally'>https://getcomposer.org/doc/00-intro.md#globally</a></p>";
-	echo "<p>Once composer is installed navigate to the working directory in your terminal/command promt and enter 'composer install'</p>";
-	exit;
+    echo '<h1>Please install via composer.json</h1>';
+    echo "<p>Install Composer instructions: <a href='https://getcomposer.org/doc/00-intro.md#globally'>https://getcomposer.org/doc/00-intro.md#globally</a></p>";
+    echo "<p>Once composer is installed navigate to the working directory in your terminal/command promt and enter 'composer install'</p>";
+    exit;
 }
 
 if (!is_readable('app/core/Config.php')) {
-	die('No Config.php found, configure and rename Config.example.php to Config.php in app/core.');
+    die('No Config.php found, configure and rename Config.example.php to Config.php in app/core.');
 }
 
 /*
@@ -33,7 +33,7 @@ if (!is_readable('app/core/Config.php')) {
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'development');
+    define('ENVIRONMENT', 'development');
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -43,20 +43,19 @@ if (!is_readable('app/core/Config.php')) {
  * By default development will show errors but production will hide them.
  */
 
-if (defined('ENVIRONMENT'))
-{
-	switch (ENVIRONMENT){
-		case 'development':
-			error_reporting(E_ALL);
-		break;
+if (defined('ENVIRONMENT')) {
+    switch (ENVIRONMENT) {
+        case 'development':
+            error_reporting(E_ALL);
+        break;
 
-		case 'production':
-			error_reporting(0);
-		break;
+        case 'production':
+            error_reporting(0);
+        break;
 
-		default:
-			exit('The application environment is not set correctly.');
-	}
+        default:
+            exit('The application environment is not set correctly.');
+    }
 }
 
 //initiate config

@@ -1,10 +1,11 @@
 <?php
+
 use \helpers\Password;
 
-if(file_exists(__DIR__.'/../vendor/autoload.php')){
+if (file_exists(__DIR__.'/../vendor/autoload.php')) {
     require __DIR__.'/../vendor/autoload.php';
 } else {
-    echo "Please install via composer.json";
+    echo 'Please install via composer.json';
     exit;
 }
 

@@ -13,15 +13,16 @@ use models\ExamService;
 use models\PlanningService;
 use models\RoomService;
 
-class Administration extends Controller {
-
+class Administration extends Controller
+{
     private $data;
     private $examService;
     private $planningService;
     private $evaluationService;
     private $roomService;
 
-    public function __construct() {
+    public function __construct()
+    {
         if (Session::get('login') == false) {
             Url::redirect('auth/login');
         }
@@ -37,7 +38,8 @@ class Administration extends Controller {
         parent::__construct();
     }
 
-    public function index() {
+    public function index()
+    {
         $this->data['title'] = 'Dashboard';
 
         View::rendertemplate('header', $this->data);
@@ -45,7 +47,8 @@ class Administration extends Controller {
         View::rendertemplate('footer');
     }
 
-    public function planExam() {
+    public function planExam()
+    {
         if (isset($_POST['create'])) {
             $planningData = array(
                 'examCode' => $_POST['examCode'],
@@ -60,7 +63,7 @@ class Administration extends Controller {
                 $this->data['error'] = 'FOUT';
             }
 
-            $this->data['message'] = 'Tentamen ' . $planningData['examCode'] . ' is nu ingepland op ' . $planningData['dateTime'];
+            $this->data['message'] = 'Tentamen '.$planningData['examCode'].' is nu ingepland op '.$planningData['dateTime'];
         }
 
         if (isset($_POST['delete'])) {
@@ -71,28 +74,30 @@ class Administration extends Controller {
 
             $this->planningService->deletePlanning($planningData);
 
-            $this->data['message'] = 'Planning #' . $planningData['planningId'] . ' met examen code ' . $planningData['examCode'] . ' is verwijderd';
+            $this->data['message'] = 'Planning #'.$planningData['planningId'].' met examen code '.$planningData['examCode'].' is verwijderd';
         }
 
         try {
-            $exams = $this->examService->fetchExams(0,50);
+            $exams = $this->examService->fetchExams(0, 50);
             $plannings = $this->planningService->fetchPlannings(0, 50);
             $rooms = $this->roomService->fetchRooms();
         } catch (\Exception $ex) {
-            var_dump($ex->getMessage()); exit;
+            var_dump($ex->getMessage());
+            exit;
         }
 
         $this->data['title'] = 'Planning Tentamens';
-		$this->data['exams'] = $exams;
+        $this->data['exams'] = $exams;
         $this->data['plannings'] = $plannings;
-		$this->data['rooms'] = $rooms;
+        $this->data['rooms'] = $rooms;
 
         View::rendertemplate('header', $this->data);
         View::render('administration/plan-exam', $this->data);
         View::rendertemplate('footer');
     }
 
-    public function prepareExam() {
+    public function prepareExam()
+    {
         $this->data['title'] = 'Voorbereiden Tentamens';
         $this->data['planning'] = $this->planningService->fetchPlannings(0, 50);
 
@@ -101,7 +106,8 @@ class Administration extends Controller {
         View::rendertemplate('footer');
     }
 
-    public function evaluateExam() {
+    public function evaluateExam()
+    {
         $this->data['title'] = 'Evaluatie Tentamens';
         $this->data['exams'] = $this->examService->fetchExams(0, 50);
 
@@ -110,7 +116,8 @@ class Administration extends Controller {
         View::rendertemplate('footer');
     }
 
-    public function evaluateExamView() {
+    public function evaluateExamView()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = $_POST;
             $data['gebruikerID'] = $this->data['userid'];
@@ -139,7 +146,8 @@ class Administration extends Controller {
         View::rendertemplate('footer');
     }
 
-    public function managementReporting() {
+    public function managementReporting()
+    {
         $this->data['title'] = 'Management Rapportage';
 
         $reportArray = array();
@@ -169,5 +177,4 @@ class Administration extends Controller {
         View::render('administration/management-reporting', $this->data);
         View::rendertemplate('footer');
     }
-
 }

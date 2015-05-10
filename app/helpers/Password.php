@@ -1,5 +1,8 @@
-<?php namespace helpers;  
-/**
+<?php
+
+namespace helpers;
+
+/*
  * A Compatibility library with PHP 5.5's simplified password hashing API.
  *
  * @author Anthony Ferrara <ircmaxell@php.net>
@@ -8,17 +11,14 @@
  */
 
 if (!defined('PASSWORD_DEFAULT')) {
-
     define('PASSWORD_BCRYPT', 1);
     define('PASSWORD_DEFAULT', PASSWORD_BCRYPT);
-
 }
 
-class Password {
-
-
+class Password
+{
     /**
-     * Hash the password using the specified algorithm
+     * Hash the password using the specified algorithm.
      *
      * @param string $password The password to hash
      * @param int    $algo     The algorithm to use (Defined by PASSWORD_* constants)
@@ -26,18 +26,22 @@ class Password {
      *
      * @return string|false The hashed password, or false on error.
      */
-    static public function make($password, $algo = PASSWORD_BCRYPT, array $options = array()) {
+    public static function make($password, $algo = PASSWORD_BCRYPT, array $options = array())
+    {
         if (!function_exists('crypt')) {
-            trigger_error("Crypt must be loaded for password_hash to function", E_USER_WARNING);
-            return null;
+            trigger_error('Crypt must be loaded for password_hash to function', E_USER_WARNING);
+
+            return;
         }
         if (!is_string($password)) {
-            trigger_error("password_hash(): Password must be a string", E_USER_WARNING);
-            return null;
+            trigger_error('password_hash(): Password must be a string', E_USER_WARNING);
+
+            return;
         }
         if (!is_int($algo)) {
-            trigger_error("password_hash() expects parameter 2 to be long, " . gettype($algo) . " given", E_USER_WARNING);
-            return null;
+            trigger_error('password_hash() expects parameter 2 to be long, '.gettype($algo).' given', E_USER_WARNING);
+
+            return;
         }
         switch ($algo) {
             case PASSWORD_BCRYPT:
@@ -46,19 +50,21 @@ class Password {
                 if (isset($options['cost'])) {
                     $cost = $options['cost'];
                     if ($cost < 4 || $cost > 31) {
-                        trigger_error(sprintf("password_hash(): Invalid bcrypt cost parameter specified: %d", $cost), E_USER_WARNING);
-                        return null;
+                        trigger_error(sprintf('password_hash(): Invalid bcrypt cost parameter specified: %d', $cost), E_USER_WARNING);
+
+                        return;
                     }
                 }
                 // The length of salt to generate
                 $raw_salt_len = 16;
                 // The length required in the final serialization
                 $required_salt_len = 22;
-                $hash_format = sprintf("$2y$%02d$", $cost);
+                $hash_format = sprintf('$2y$%02d$', $cost);
                 break;
             default:
-                trigger_error(sprintf("password_hash(): Unknown password hashing algorithm: %s", $algo), E_USER_WARNING);
-                return null;
+                trigger_error(sprintf('password_hash(): Unknown password hashing algorithm: %s', $algo), E_USER_WARNING);
+
+                return;
         }
         if (isset($options['salt'])) {
             switch (gettype($options['salt'])) {
@@ -78,11 +84,13 @@ class Password {
                 case 'resource':
                 default:
                     trigger_error('password_hash(): Non-string salt parameter supplied', E_USER_WARNING);
-                    return null;
+
+                    return;
             }
             if (strlen($salt) < $required_salt_len) {
-                trigger_error(sprintf("password_hash(): Provided salt is too short: %d expecting %d", strlen($salt), $required_salt_len), E_USER_WARNING);
-                return null;
+                trigger_error(sprintf('password_hash(): Provided salt is too short: %d expecting %d', strlen($salt), $required_salt_len), E_USER_WARNING);
+
+                return;
             } elseif (0 == preg_match('#^[a-zA-Z0-9./]+$#D', $salt)) {
                 $salt = str_replace('+', '.', base64_encode($salt));
             }
@@ -127,7 +135,7 @@ class Password {
         }
         $salt = substr($salt, 0, $required_salt_len);
 
-        $hash = $hash_format . $salt;
+        $hash = $hash_format.$salt;
 
         $ret = crypt($password, $hash);
 
@@ -154,7 +162,8 @@ class Password {
      *
      * @return array The array of information about the hash.
      */
-    static public function password_get_info($hash) {
+    public static function password_get_info($hash)
+    {
         $return = array(
             'algo' => 0,
             'algoName' => 'unknown',
@@ -163,14 +172,15 @@ class Password {
         if (substr($hash, 0, 4) == '$2y$' && strlen($hash) == 60) {
             $return['algo'] = PASSWORD_BCRYPT;
             $return['algoName'] = 'bcrypt';
-            list($cost) = sscanf($hash, "$2y$%d$");
+            list($cost) = sscanf($hash, '$2y$%d$');
             $return['options']['cost'] = $cost;
         }
+
         return $return;
     }
 
     /**
-     * Determine if the password hash needs to be rehashed according to the options provided
+     * Determine if the password hash needs to be rehashed according to the options provided.
      *
      * If the answer is true, after validating the password using password_verify, rehash it.
      *
@@ -178,9 +188,10 @@ class Password {
      * @param int    $algo    The algorithm used for new password hashes
      * @param array  $options The options array passed to password_hash
      *
-     * @return boolean True if the password needs to be rehashed.
+     * @return bool True if the password needs to be rehashed.
      */
-    static public function needs_rehash($hash, $algo = PASSWORD_BCRYPT, array $options = array()) {
+    public static function needs_rehash($hash, $algo = PASSWORD_BCRYPT, array $options = array())
+    {
         $info = password_get_info($hash);
         if ($info['algo'] != $algo) {
             return true;
@@ -193,20 +204,23 @@ class Password {
                 }
                 break;
         }
+
         return false;
     }
 
     /**
-     * Verify a password against a hash using a timing attack resistant approach
+     * Verify a password against a hash using a timing attack resistant approach.
      *
      * @param string $password The password to verify
      * @param string $hash     The hash to verify against
      *
-     * @return boolean If the password matches the hash
+     * @return bool If the password matches the hash
      */
-    static public function verify($password, $hash) {
+    public static function verify($password, $hash)
+    {
         if (!function_exists('crypt')) {
-            trigger_error("Crypt must be loaded for password_verify to function", E_USER_WARNING);
+            trigger_error('Crypt must be loaded for password_verify to function', E_USER_WARNING);
+
             return false;
         }
         $ret = crypt($password, $hash);

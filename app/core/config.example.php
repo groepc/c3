@@ -13,49 +13,49 @@ use helpers\Session;
  * @version 2.1
  * @date June 27, 2014
  */
-class Config {
+class Config
+{
+    public function __construct()
+    {
 
-	public function __construct() {
+        //turn on output buffering
+        ob_start();
 
-		//turn on output buffering
-		ob_start();
+        //site address
+        define('DIR', 'http://example.com/');
 
-		//site address
-		define('DIR', 'http://example.com/');
-
-		//set default controller and method for legacy calls
+        //set default controller and method for legacy calls
         define('DEFAULT_CONTROLLER', 'Administration');
-		define('DEFAULT_METHOD' , 'index');
+        define('DEFAULT_METHOD', 'index');
 
-		//set a default language
-		define('LANGUAGE_CODE', 'en');
+        //set a default language
+        define('LANGUAGE_CODE', 'en');
 
-		//database details ONLY NEEDED IF USING A DATABASE
-		define('DB_TYPE', 'mysql');
-		define('DB_HOST', 'localhost');
-		define('DB_NAME', 'dbname');
-		define('DB_USER', 'root');
-		define('DB_PASS', 'password');
-		define('PREFIX', 'smvc_');
+        //database details ONLY NEEDED IF USING A DATABASE
+        define('DB_TYPE', 'mysql');
+        define('DB_HOST', 'localhost');
+        define('DB_NAME', 'dbname');
+        define('DB_USER', 'root');
+        define('DB_PASS', 'password');
+        define('PREFIX', 'smvc_');
 
-		//set prefix for sessions
-		define('SESSION_PREFIX', 'smvc_');
+        //set prefix for sessions
+        define('SESSION_PREFIX', 'smvc_');
 
-		//optionall create a constant for the name of the site
+        //optionall create a constant for the name of the site
         define('SITETITLE', 'Administratie');
 
-		//turn on custom error handling
-		set_exception_handler('core\Logger::exception_handler');
-		set_error_handler('core\Logger::error_handler');
+        //turn on custom error handling
+        set_exception_handler('core\Logger::exception_handler');
+        set_error_handler('core\Logger::error_handler');
 
-		//set timezone
-		date_default_timezone_set('Europe/London');
+        //set timezone
+        date_default_timezone_set('Europe/London');
 
-		//start sessions
-		Session::init();
+        //start sessions
+        Session::init();
 
-		//set the default template
-		Session::set('template', 'avans');
-	}
-
+        //set the default template
+        Session::set('template', 'avans');
+    }
 }

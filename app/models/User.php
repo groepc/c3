@@ -1,4 +1,5 @@
 <?php
+
 namespace models;
 
 use core\Model;
@@ -63,11 +64,12 @@ class User extends Model
      */
     public function getId()
     {
-        return (int)$this->id;
+        return (int) $this->id;
     }
 
     /**
      * @param int $id
+     *
      * @return $this
      */
     public function setId($id)
@@ -87,6 +89,7 @@ class User extends Model
 
     /**
      * @param string $username
+     *
      * @return $this
      */
     public function setUsername($username)
@@ -106,6 +109,7 @@ class User extends Model
 
     /**
      * @param string $password
+     *
      * @return $this
      */
     public function setPassword($password)
@@ -125,6 +129,7 @@ class User extends Model
 
     /**
      * @param string $firstname
+     *
      * @return $this
      */
     public function setFirstname($firstname)
@@ -144,6 +149,7 @@ class User extends Model
 
     /**
      * @param string $middlename
+     *
      * @return $this
      */
     public function setMiddlename($middlename)
@@ -163,6 +169,7 @@ class User extends Model
 
     /**
      * @param string $lastname
+     *
      * @return $this
      */
     public function setLastname($lastname)
@@ -182,6 +189,7 @@ class User extends Model
 
     /**
      * @param string $gender
+     *
      * @return $this
      */
     public function setGender($gender)

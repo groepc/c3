@@ -4,19 +4,23 @@ namespace models;
 
 use core\Model;
 
-class EvaluationService extends Model {
-
-    public function __construct() {
+class EvaluationService extends Model
+{
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function insertEvaluation($data) {
+    public function insertEvaluation($data)
+    {
         $this->_db->insert('evaluatie', $data);
+
         return $this->_db->lastInsertId('ID');
     }
 
-    public function getEvaluationById($id) {
-        $data = $this->_db->select("SELECT * FROM evaluation WHERE id = :id", array(':id' => $id));
+    public function getEvaluationById($id)
+    {
+        $data = $this->_db->select('SELECT * FROM evaluation WHERE id = :id', array(':id' => $id));
 
         $evaluation = new Evaluation();
         $evaluation->setData($data[0]);
@@ -24,8 +28,9 @@ class EvaluationService extends Model {
         return $evaluation;
     }
 
-    public function fetchEvaluationByExamCode($code, $userid) {
-        $data = $this->_db->select("SELECT * FROM evaluatie WHERE tentamenCode = :code AND gebruikerID = :userid", array(':code' => $code, ':userid' => $userid));
+    public function fetchEvaluationByExamCode($code, $userid)
+    {
+        $data = $this->_db->select('SELECT * FROM evaluatie WHERE tentamenCode = :code AND gebruikerID = :userid', array(':code' => $code, ':userid' => $userid));
 
         $evaluation = new Evaluation();
         $evaluation->setData($data[0]);
@@ -33,8 +38,9 @@ class EvaluationService extends Model {
         return $evaluation;
     }
 
-    public function getEvaluation() {
-        $data = $this->_db->select("SELECT * FROM evaluatie");
+    public function getEvaluation()
+    {
+        $data = $this->_db->select('SELECT * FROM evaluatie');
 
         $evaluationArray = array();
         foreach ($data as $evaluationData) {
@@ -54,5 +60,4 @@ class EvaluationService extends Model {
 
         return $evaluationArray;
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace models;
 
 use core\Model;
@@ -37,6 +38,7 @@ class Planning extends Model
 
     /**
      * @param $id
+     *
      * @return $this
      */
     public function setId($id)
@@ -56,6 +58,7 @@ class Planning extends Model
 
     /**
      * @param $dateTime
+     *
      * @return $this
      */
     public function setDateTime($dateTime)
@@ -75,6 +78,7 @@ class Planning extends Model
 
     /**
      * @param $examCode
+     *
      * @return $this
      */
     public function setExamCode($examCode)
@@ -94,6 +98,7 @@ class Planning extends Model
 
     /**
      * @param $userId
+     *
      * @return $this
      */
     public function setUserId($userId)
@@ -113,6 +118,7 @@ class Planning extends Model
 
     /**
      * @param $roomCode
+     *
      * @return $this
      */
     public function setRoomCode($roomCode)
@@ -132,6 +138,7 @@ class Planning extends Model
 
     /**
      * @param $user
+     *
      * @return $this
      */
     public function setUser($user)
@@ -151,6 +158,7 @@ class Planning extends Model
 
     /**
      * @param $exam
+     *
      * @return $this
      */
     public function setExam($exam)

@@ -21,7 +21,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php /** @var \models\Exam $exam */ ?>
+                    <?php/** @var \models\Exam $exam */ ?>
                     <?php foreach ($data['exams'] as $exam): ?>
                         <tr>
                             <td><?=$exam->getCode()?></td>
@@ -67,7 +67,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php /** @var \models\Planning $planning */ ?>
+                    <?php/** @var \models\Planning $planning */ ?>
                     <?php foreach ($data['plannings'] as $planning): ?>
                         <tr>
                             <td><?=$planning->getDateTime()?></td>
@@ -102,7 +102,7 @@
     </div>
 </div>
 
-<?php /** @var \models\Exam $exam */ ?>
+<?php/** @var \models\Exam $exam */ ?>
 <?php foreach ($data['exams'] as $exam): ?>
     <!-- Modal -->
     <div class="modal fade" id="planExam_<?=$exam->getCode()?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -142,7 +142,7 @@
                             <label for="planningRoom" class="col-sm-2 control-label">Lokaal</label>
                             <div class="col-sm-10">
                                 <select class="form-control" id="planningRoom" name="planningRoom" required>
-                                <?php /** @var \models\Room $room */ ?>
+                                <?php/** @var \models\Room $room */ ?>
                                 <?php foreach ($data['rooms'] as $room): ?>
                                     <?php if ($exam->getStudentAmount() <= $room->getSeats()): ?>
                                         <?php if ($room->getComputerRoom()): ?>
@@ -168,7 +168,7 @@
     </div>
 <?php endforeach; ?>
 
-<?php /** @var \models\Planning $planning */ ?>
+<?php/** @var \models\Planning $planning */ ?>
 <?php foreach ($data['plannings'] as $planning): ?>
     <!-- Modal -->
     <div class="modal fade" id="deletePlanning_<?=$planning->getId()?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

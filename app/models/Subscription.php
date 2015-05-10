@@ -1,4 +1,5 @@
 <?php
+
 namespace models;
 
 use core\Model;
@@ -39,6 +40,7 @@ class Subscription extends Model
 
     /**
      * @param $planningId
+     *
      * @return $this
      */
     public function setPlanningId($planningId)
@@ -58,6 +60,7 @@ class Subscription extends Model
 
     /**
      * @param $userId
+     *
      * @return $this
      */
     public function setUserId($userId)
@@ -77,6 +80,7 @@ class Subscription extends Model
 
     /**
      * @param $dateTime
+     *
      * @return $this
      */
     public function setDateTime($dateTime)
@@ -96,6 +100,7 @@ class Subscription extends Model
 
     /**
      * @param $grade
+     *
      * @return $this
      */
     public function setGrade($grade)
@@ -115,6 +120,7 @@ class Subscription extends Model
 
     /**
      * @param $reviewed
+     *
      * @return $this
      */
     public function setReviewed($reviewed)
@@ -134,6 +140,7 @@ class Subscription extends Model
 
     /**
      * @param $present
+     *
      * @return $this
      */
     public function setPresent($present)
@@ -153,6 +160,7 @@ class Subscription extends Model
 
     /**
      * @param $planning
+     *
      * @return $this
      */
     public function setPlanning($planning)
@@ -172,6 +180,7 @@ class Subscription extends Model
 
     /**
      * @param $user
+     *
      * @return $this
      */
     public function setUser($user)
