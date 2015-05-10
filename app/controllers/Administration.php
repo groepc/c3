@@ -118,6 +118,7 @@ class Administration extends Controller
         $planningId = $_GET['planningId'];
 
         $this->data['title'] = 'Inschrijvingen';
+        $this->data['planning'] = $this->planningService->fetchPlanningById($planningId);
         $this->data['subscription'] = $this->subscriptionService->fetchSubscriptions($planningId);
 
         View::rendertemplate('header', $this->data);
