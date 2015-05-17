@@ -70,6 +70,29 @@ class PlanningService extends Model
         return $planningArray;
     }
 
+    public function fetchCompletedPlannings($offset = 0, $amount = 100)
+    {
+        $data = $this->_db->select('SELECT * FROM planning LIMIT :offset, :amount', array(':offset' => $offset, ':amount' => $amount));
+
+        $planningArray = array();
+        foreach ($data as $planningData) {
+            $planning = new Planning();
+            $planning->setData($planningData);
+
+            $userService = new UserService();
+            $user = $userService->getUserById($planning->getUserId());
+            $planning->setUser($user);
+
+            $examService = new ExamService();
+            $exam = $examService->fetchExamByCode($planning->getExamCode());
+            $planning->setExam($exam);
+
+            $planningArray[] = $planning;
+        }
+
+        return $planningArray;
+    }
+
     public function createPlanning($planningData)
     {
         $date = date('Y-m-d H:i:s', strtotime($planningData['dateTime']));

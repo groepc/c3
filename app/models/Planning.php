@@ -167,4 +167,15 @@ class Planning extends Model
 
         return $this;
     }
+
+    /**
+     * @return array
+     */
+    public function getSubscriptions()
+    {
+        $subscriptionService = new SubscriptionService();
+        $subscriptions = $subscriptionService->fetchSubscriptions($this->getId());
+
+        return $subscriptions;
+    }
 }
