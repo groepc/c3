@@ -44,7 +44,7 @@
 			<ul class="nav nav-sidebar">
 				<li><a href="/administration">Dashboard</a></li>
 				<li><a href="/administration/plan-exam">Planning Tentamens</a></li>
-				<li><a href="/administration/prepare-exam">Voorbereiden Tentamens</a></li>
+				<li><a href="/administration/prepare-exam">Overzicht Tentamens</a></li>
 				<li><a href="/administration/evaluate-exam">Evaluatie Tentamens</a></li>
 				<li><a href="/administration/management-reporting">Management Rapportage</a></li>
 			</ul>

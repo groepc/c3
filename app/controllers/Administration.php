@@ -104,7 +104,7 @@ class Administration extends Controller
 
     public function prepareExam()
     {
-        $this->data['title'] = 'Voorbereiden Tentamens';
+        $this->data['title'] = 'Overzicht Tentamens';
         $this->data['planning'] = $this->planningService->fetchPlannings(0, 50);
 
         View::rendertemplate('header', $this->data);
@@ -126,7 +126,7 @@ class Administration extends Controller
             $this->data['message'] = 'Inschrijvingen met planning\'s id: '.$planningId.' is verwerkt.';
         }
 
-        $this->data['title'] = 'Inschrijvingen';
+        $this->data['title'] = 'Overzicht Tentamen';
         $this->data['planning'] = $this->planningService->fetchPlanningById($planningId);
         $this->data['subscription'] = $this->subscriptionService->fetchSubscriptions($planningId);
 
@@ -178,29 +178,6 @@ class Administration extends Controller
     public function managementReporting()
     {
         $this->data['title'] = 'Management Rapportage';
-
-        $reportArray = array();
-        $periods = $this->examService->getPeriods();
-        foreach ($periods as $period) {
-            $exams = $this->examService->getExamByPeriod($period);
-            $examCount = count($exams);
-
-            $studentCount = 0;
-            /** @var Exam $exam */
-            foreach ($exams as $exam) {
-                $studentCount += (int) $exam->getStudentAmount();
-
-                $plannings = $this->planningService->fetchPlanningByExamCode($exam->getCode());
-            }
-
-            $reportArray[] = array(
-                'period' => $period,
-                'examCount' => $examCount,
-                'studentCount' => $studentCount,
-            );
-        }
-
-        $this->data['reporting'] = $reportArray;
 
         View::rendertemplate('header', $this->data);
         View::render('administration/management-reporting', $this->data);
