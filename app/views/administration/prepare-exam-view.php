@@ -45,6 +45,7 @@
                     <th>Achternaam</th>
                     <th>Datum</th>
                     <th>Cijfer</th>
+                    <th>Aanwezig</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,6 +58,7 @@
                     <td><?=$subscription->getUser()->getLastname()?></td>
                     <td><?=$subscription->getDateTime()?></td>
                     <td><?=$subscription->getGrade()?></td>
+                    <td><?=$subscription->getPresent()?></td>
                 </tr>
             <?php $count++; endforeach; ?>
             </tbody>

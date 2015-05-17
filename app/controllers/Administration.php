@@ -122,9 +122,20 @@ class Administration extends Controller
         $planningId = $_GET['planningId'];
 
         if (isset($_POST['process'])) {
+            $presentArray = array();
+            foreach ($_POST as $key => $value) {
+                if (substr($key, 0, 8) != "present_") {
+                    continue;
+                }
+
+                $newKey = str_replace('present_', '', $key);
+                $presentArray[$newKey] = $value;
+            }
+
+            $this->subscriptionService->completeAttendees($planningId, $presentArray);
             $this->subscriptionService->completeGrades($planningId);
 
-            $this->data['message'] = 'Inschrijvingen met planning\'s id: ' . $planningId . ' is verwerkt.';
+            $this->data['message'] = 'Tentamen is verwerkt.';
         }
 
         $this->data['title'] = 'Overzicht Tentamen';

@@ -45,4 +45,17 @@ class SubscriptionService extends Model
 
         return true;
     }
+
+    public function completeAttendees($planningId, array $attendees)
+    {
+        foreach ($attendees as $key => $value) {
+            $data['aanwezig'] = $value;
+            $where['planningID'] = $planningId;
+            $where['gebruikerID'] = $key;
+
+            $this->_db->update('inschrijving', $data, $where);
+        }
+
+        return true;
+    }
 }
