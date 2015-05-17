@@ -5,11 +5,13 @@
 <?php if (isset($data['message'])): ?>
     <div class="alert alert-success" role="alert"><?=$data['message']?></div>
 <?php endif; ?>
+<?php /** @var \models\Planning $planning */ ?>
+<?php $planning = $data['planning']; ?>
 
 <div class="panel panel-default">
     <div class="panel-heading">Inschrijvingen</div>
     <div class="panel-body">
-        <form>
+        <form method="post" action="/administration/prepare-exam-view?planningId=<?=$planning->getId()?>">
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
