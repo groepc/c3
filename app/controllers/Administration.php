@@ -70,7 +70,7 @@ class Administration extends Controller
                 $this->data['error'] = 'FOUT';
             }
 
-            $this->data['message'] = 'Tentamen ' . $planningData['examCode'] . ' is nu ingepland op ' . $planningData['dateTime'];
+            $this->data['message'] = 'Tentamen ' . $planningData['examCode'] . ' is nu ingepland op ' . date('d-m-Y H:i', strtotime($planningData['dateTime']));
         }
 
         if (isset($_POST['delete'])) {
