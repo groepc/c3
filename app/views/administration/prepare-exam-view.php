@@ -23,14 +23,16 @@
             </tr>
         </table>
 
-        <p>
-            <a href="">
+        <div class="pull-left">
+            <!--<a href="">
                 <button class="btn btn-primary">Afdrukken</button>
-            </a>
+            </a>-->
+        </div>
+        <div class="pull-right">
             <form method="post" action="">
-                <button type="submit" name="process" class="btn btn-success">Verwerken</button>
+                <button type="submit" name="process" class="btn btn-success">Afronden</button>
             </form>
-        </p>
+        </div>
     </div>
 </div>
 
@@ -44,6 +46,7 @@
                     <th>Voornaam</th>
                     <th>Achternaam</th>
                     <th>Datum</th>
+                    <th>Cijfer</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,6 +58,7 @@
                     <td><?=$subscription->getUser()->getFirstname()?></td>
                     <td><?=$subscription->getUser()->getLastname()?></td>
                     <td><?=$subscription->getDateTime()?></td>
+                    <td><?=$subscription->getGrade()?></td>
                 </tr>
             <?php $count++; endforeach; ?>
             </tbody>
