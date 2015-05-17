@@ -32,6 +32,9 @@
                     }
                 }
 
+                $gradeArray = array_filter($gradeArray, 'is_numeric');
+                $gradeArray = array_filter($gradeArray, 'ctype_digit');
+
                 $highestGrade = 'N/A';
                 $lowestGrade = 'N/A';
                 $averageGrade = 'N/A';
@@ -48,9 +51,9 @@
                     <td class="text-right"><?=$planning->getExam()->getStudentAmount()?></td>
                     <td class="text-right"><?=count($subscriptions)?></td>
                     <td class="text-right"><?=$amountPresent?></td>
-                    <td class="text-right"><?=$highestGrade?></td>
-                    <td class="text-right"><?=$lowestGrade?></td>
-                    <td class="text-right"><?=$averageGrade?></td>
+                    <td class="text-right"><?=round($highestGrade, 1)?></td>
+                    <td class="text-right"><?=round($lowestGrade, 1)?></td>
+                    <td class="text-right"><?=round($averageGrade, 1)?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
