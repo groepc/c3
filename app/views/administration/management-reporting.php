@@ -29,7 +29,10 @@
                         $presentArray[] = $subscription->getPresent();
                     }
                 }
-                $averageGrade = array_sum($gradeArray)/count($gradeArray);
+                $averageGrade = 'N/A';
+                if (count($gradeArray) > 0) {
+                    $averageGrade = array_sum($gradeArray) / count($gradeArray);
+                }
                 $amountPresent = count($presentArray);
                 ?>
                 <tr>
