@@ -68,6 +68,7 @@ Router::any('administration', '\controllers\Administration@index');
 Router::any('administration/plan-exam', '\controllers\Administration@planExam');
 Router::any('administration/prepare-exam', '\controllers\Administration@prepareExam');
 Router::any('administration/prepare-exam-view', '\controllers\Administration@prepareExamView');
+Router::any('administration/prepare-exam-process', '\controllers\Administration@prepareExamProcess');
 Router::any('administration/evaluate-exam', '\controllers\Administration@evaluateExam');
 Router::any('administration/evaluate-exam-view', '\controllers\Administration@evaluateExamView');
 Router::any('administration/evaluate-exam-save', '\controllers\Administration@evaluateExamSave');

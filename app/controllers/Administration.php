@@ -14,8 +14,8 @@ use models\PlanningService;
 use models\RoomService;
 use models\SubscriptionService;
 
-class Administration extends Controller {
-
+class Administration extends Controller
+{
     private $data;
     private $examService;
     private $planningService;
@@ -23,7 +23,8 @@ class Administration extends Controller {
     private $roomService;
     private $subscriptionService;
 
-    public function __construct() {
+    public function __construct()
+    {
         if (Session::get('login') == false) {
             Url::redirect('auth/login');
         }
@@ -40,8 +41,10 @@ class Administration extends Controller {
         parent::__construct();
     }
 
-    public function index() {
+    public function index()
+    {
         $this->data['title'] = 'Dashboard';
+
         $this->data['examsShort'] = $this->examService->fetchExams(0, 5);
         $this->data['prepareExamShort'] = $this->planningService->fetchPlannings(0, 5);
         $this->data['evaluateExamShort'] = $this->examService->fetchExams(0, 5);
@@ -51,7 +54,8 @@ class Administration extends Controller {
         View::rendertemplate('footer');
     }
 
-    public function planExam() {
+    public function planExam()
+    {
         if (isset($_POST['create'])) {
             $planningData = array(
                 'examCode' => $_POST['examCode'],
@@ -109,7 +113,8 @@ class Administration extends Controller {
         View::rendertemplate('footer');
     }
 
-    public function prepareExamView() {
+    public function prepareExamView()
+    {
         if (!$_GET['planningId']) {
             Url::redirect('administration/prepare-exam');
         }
@@ -131,7 +136,25 @@ class Administration extends Controller {
         View::rendertemplate('footer');
     }
 
-    public function evaluateExam() {
+    public function prepareExamProcess()
+    {
+        if (!$_GET['planningId']) {
+            Url::redirect('administration/prepare-exam');
+        }
+
+        $planningId = $_GET['planningId'];
+
+        $this->data['title'] = 'Afronden Tentamen';
+        $this->data['planning'] = $this->planningService->fetchPlanningById($planningId);
+        $this->data['subscription'] = $this->subscriptionService->fetchSubscriptions($planningId);
+
+        View::rendertemplate('header', $this->data);
+        View::render('administration/prepare-exam-process', $this->data);
+        View::rendertemplate('footer');
+    }
+
+    public function evaluateExam()
+    {
         $this->data['title'] = 'Evaluatie Tentamens';
         $this->data['exams'] = $this->evaluationService->fetchEvaluations($this->data['userid'],0, 50);
 
@@ -140,7 +163,8 @@ class Administration extends Controller {
         View::rendertemplate('footer');
     }
 
-    public function evaluateExamView() {
+    public function evaluateExamView()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = $_POST;
             $data['gebruikerID'] = $this->data['userid'];

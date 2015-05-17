@@ -29,9 +29,7 @@
             </a>-->
         </div>
         <div class="pull-right">
-            <form method="post" action="">
-                <button type="submit" name="process" class="btn btn-success">Afronden</button>
-            </form>
+            <a href="/administration/prepare-exam-process?planningId=<?=$planning->getId()?>"<button type="button" class="btn btn-success">Afronden</button></a>
         </div>
     </div>
 </div>
