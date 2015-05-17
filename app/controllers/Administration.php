@@ -210,8 +210,11 @@ class Administration extends Controller
         View::rendertemplate('footer');
     }
 
-    public function managementReporting() {
+    public function managementReporting()
+    {
         $this->data['title'] = 'Management Rapportage';
+
+        $this->data['plannings'] = $this->planningService->fetchCompletedPlannings();
 
         View::rendertemplate('header', $this->data);
         View::render('administration/management-reporting', $this->data);
