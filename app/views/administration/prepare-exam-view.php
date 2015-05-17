@@ -12,6 +12,7 @@
         <table class="table">
             <?php /** @var \models\Planning $planning */ ?>
             <?php $planning = $data['planning']; ?>
+            <?php $exam = $planning->getExam(); ?>
             <tr>
                 <th>Code</th><td><?=$planning->getExamCode()?></td>
             <tr></tr>
@@ -28,9 +29,12 @@
                 <button class="btn btn-primary">Afdrukken</button>
             </a>-->
         </div>
-        <div class="pull-right">
-            <a href="/administration/prepare-exam-process?planningId=<?=$planning->getId()?>"<button type="button" class="btn btn-success">Afronden</button></a>
-        </div>
+
+        <?php if (!$exam->getGradeAvailable()): ?>
+            <div class="pull-right">
+                <a href="/administration/prepare-exam-process?planningId=<?=$planning->getId()?>"<button type="button" class="btn btn-success">Afronden</button></a>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 

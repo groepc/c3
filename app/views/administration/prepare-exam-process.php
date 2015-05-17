@@ -31,7 +31,7 @@
                         <td><?=$count?></td>
                         <td><?=$subscription->getUser()->getFirstname()?></td>
                         <td><?=$subscription->getUser()->getLastname()?></td>
-                        <td><?=$subscription->getDateTime()?></td>
+                        <td><?=date('d-m-Y H:i', strtotime($subscription->getDateTime()))?></td>
                         <td><?=$subscription->getGrade()?></td>
                         <td><input type="radio" name="present_<?=$subscription->getUserId()?>" value="1" required="required"> Ja <input type="radio" name="present_<?=$subscription->getUserId()?>" value="0"> Nee</td>
                     </tr>

@@ -78,4 +78,11 @@ class ExamService extends Model
 
         return $examArray;
     }
+
+    public function completeExam($code)
+    {
+        $data['cijferZichtbaar'] = 1;
+        $where['code'] = $code;
+        $this->_db->update('tentamen', $data, $where);
+    }
 }

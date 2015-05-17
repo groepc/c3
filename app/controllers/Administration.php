@@ -47,7 +47,7 @@ class Administration extends Controller
 
         $this->data['examsShort'] = $this->examService->fetchExams(0, 5);
         $this->data['prepareExamShort'] = $this->planningService->fetchPlannings(0, 5);
-        $this->data['evaluateExamShort'] = $this->evaluationService->fetchEvaluations($this->data['userid'],0, 5);
+        $this->data['evaluateExamShort'] = $this->examService->fetchExams(0, 5);
 
         View::rendertemplate('header', $this->data);
         View::render('administration/index', $this->data);
@@ -132,8 +132,11 @@ class Administration extends Controller
                 $presentArray[$newKey] = $value;
             }
 
+            $code = $this->planningService->fetchPlanningById($planningId)->getExamCode();
+
             $this->subscriptionService->completeAttendees($planningId, $presentArray);
             $this->subscriptionService->completeGrades($planningId);
+            $this->examService->completeExam($code);
 
             $this->data['message'] = 'Tentamen is verwerkt.';
         }

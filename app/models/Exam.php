@@ -14,6 +14,7 @@ class Exam extends Model {
     private $supervisor;
     private $userId;
     private $user;
+    private $gradeAvailable;
     private $evaluation = false;
 
     public function __construct() {
@@ -28,6 +29,7 @@ class Exam extends Model {
         $this->computerRoom = $data->computerlokaal;
         $this->supervisor = $data->surveillant;
         $this->userId = $data->gebruikerID;
+        $this->gradeAvailable = $data->cijferZichtbaar;
         if (isset($data->eca)) {
             $this->evaluation = $data->eca;
         }
@@ -156,4 +158,8 @@ class Exam extends Model {
         return $this;
     }
 
+    public function getGradeAvailable()
+    {
+        return $this->gradeAvailable;
+    }
 }
