@@ -24,7 +24,7 @@
 						<td><?=$exam->getCourse()?></td>
 						<td><?=$exam->getPeriod()?></td>
 						<td><?=$exam->getUser()->getFullname()?></td>
-						<td class="text-right"><a href="/administration/evaluate-exam-view?code=<?=$exam->getCode()?>"><button type="button" class="btn btn-success btn-xs">invullen</button></a></td>
+						<td class="text-right"><a href="/administration/evaluate-exam-view?code=<?=$exam->getCode()?>"><?php if (!empty($exam->getEvaluation())) : ?><button type="button" class="btn btn-primary btn-xs">Evaluatie inzien<?php else : ?><button type="button" class="btn btn-success btn-xs">Maak evaluatie<?php endif; ?></button></a></td>
 					</tr>
 				<?php endforeach; ?>
 				</tbody>

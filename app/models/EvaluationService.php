@@ -38,26 +38,33 @@ class EvaluationService extends Model
         return $evaluation;
     }
 
-    public function getEvaluation()
+    public function fetchEvaluations($userID, $offset = 0, $amount = 100)
     {
-        $data = $this->_db->select('SELECT * FROM evaluatie');
+        $data = $this->_db->select('SELECT DISTINCT tentamen.code, tentamen.*, evaluatie.created_at eca FROM tentamen '
+                . 'LEFT JOIN evaluatie ON (evaluatie.gebruikerID=:userID AND evaluatie.tentamenCode=tentamen.code) ' 
+                .' LIMIT :offset, :amount', array(':userID' => $userID, ':offset' => $offset, ':amount' => $amount));
 
-        $evaluationArray = array();
-        foreach ($data as $evaluationData) {
-            $evaluation = new Evaluation();
-            $evaluation->setData($evaluationData);
+        $examArray = array();
+        foreach ($data as $examData) {
+            $exam = new Exam();
+            $exam->setData($examData);
 
             $userService = new UserService();
-            $user = $userService->getUserById($evaluation->getUserId());
-            $evaluation->setUser($user);
+            $user = $userService->getUserById($exam->getUserId());
+            $exam->setUser($user);
 
-            $examService = new ExamService();
-            $exam = $examService->getExamByCode($evaluation->getExamCode());
-            $evaluation->setExam($exam);
-
-            $evaluationArray[] = $evaluation;
+            $examArray[] = $exam;
         }
 
-        return $evaluationArray;
+        return $examArray;
+    }
+    
+    public function checkEvaluation($idUser, $code) {
+        $result = $this->_db->select("SELECT *, DATE_FORMAT(created_at, '%d-%m-%Y') datumeu, DATE_FORMAT(created_at, '%H:%i') insertTime  FROM evaluatie WHERE gebruikerID=:id AND tentamenCode=:code LIMIT 1", array(':id' => $idUser, ':code' => $code));
+        if (!empty($result)) {
+            return $result[0];
+        } else {
+            return false;
+        }
     }
 }

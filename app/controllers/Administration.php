@@ -14,8 +14,8 @@ use models\PlanningService;
 use models\RoomService;
 use models\SubscriptionService;
 
-class Administration extends Controller
-{
+class Administration extends Controller {
+
     private $data;
     private $examService;
     private $planningService;
@@ -23,8 +23,7 @@ class Administration extends Controller
     private $roomService;
     private $subscriptionService;
 
-    public function __construct()
-    {
+    public function __construct() {
         if (Session::get('login') == false) {
             Url::redirect('auth/login');
         }
@@ -41,20 +40,18 @@ class Administration extends Controller
         parent::__construct();
     }
 
-    public function index()
-    {
+    public function index() {
         $this->data['title'] = 'Dashboard';
-        $this->data['examsShort'] = $this->examService->fetchExams(0,5);
+        $this->data['examsShort'] = $this->examService->fetchExams(0, 5);
         $this->data['prepareExamShort'] = $this->planningService->fetchPlannings(0, 5);
         $this->data['evaluateExamShort'] = $this->examService->fetchExams(0, 5);
-        
+
         View::rendertemplate('header', $this->data);
         View::render('administration/index', $this->data);
         View::rendertemplate('footer');
     }
 
-    public function planExam()
-    {
+    public function planExam() {
         if (isset($_POST['create'])) {
             $planningData = array(
                 'examCode' => $_POST['examCode'],
@@ -69,7 +66,7 @@ class Administration extends Controller
                 $this->data['error'] = 'FOUT';
             }
 
-            $this->data['message'] = 'Tentamen '.$planningData['examCode'].' is nu ingepland op '.$planningData['dateTime'];
+            $this->data['message'] = 'Tentamen ' . $planningData['examCode'] . ' is nu ingepland op ' . $planningData['dateTime'];
         }
 
         if (isset($_POST['delete'])) {
@@ -80,7 +77,7 @@ class Administration extends Controller
 
             $this->planningService->deletePlanning($planningData);
 
-            $this->data['message'] = 'Planning #'.$planningData['planningId'].' met examen code '.$planningData['examCode'].' is verwijderd';
+            $this->data['message'] = 'Planning #' . $planningData['planningId'] . ' met examen code ' . $planningData['examCode'] . ' is verwijderd';
         }
 
         try {
@@ -102,8 +99,7 @@ class Administration extends Controller
         View::rendertemplate('footer');
     }
 
-    public function prepareExam()
-    {
+    public function prepareExam() {
         $this->data['title'] = 'Voorbereiden Tentamens';
         $this->data['planning'] = $this->planningService->fetchPlannings(0, 50);
 
@@ -112,8 +108,7 @@ class Administration extends Controller
         View::rendertemplate('footer');
     }
 
-    public function prepareExamView()
-    {
+    public function prepareExamView() {
         if (!$_GET['planningId']) {
             Url::redirect('administration/prepare-exam');
         }
@@ -123,7 +118,7 @@ class Administration extends Controller
         if (isset($_POST['process'])) {
             $this->subscriptionService->completeGrades($planningId);
 
-            $this->data['message'] = 'Inschrijvingen met planning\'s id: '.$planningId.' is verwerkt.';
+            $this->data['message'] = 'Inschrijvingen met planning\'s id: ' . $planningId . ' is verwerkt.';
         }
 
         $this->data['title'] = 'Inschrijvingen';
@@ -135,18 +130,16 @@ class Administration extends Controller
         View::rendertemplate('footer');
     }
 
-    public function evaluateExam()
-    {
+    public function evaluateExam() {
         $this->data['title'] = 'Evaluatie Tentamens';
-        $this->data['exams'] = $this->examService->fetchExams(0, 50);
+        $this->data['exams'] = $this->evaluationService->fetchEvaluations($this->data['userid'],0, 50);
 
         View::rendertemplate('header', $this->data);
         View::render('administration/evaluate-exam', $this->data);
         View::rendertemplate('footer');
     }
 
-    public function evaluateExamView()
-    {
+    public function evaluateExamView() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = $_POST;
             $data['gebruikerID'] = $this->data['userid'];
@@ -169,14 +162,19 @@ class Administration extends Controller
         if ($evaluation->getId()) {
             $this->data['evaluation'] = $evaluation;
         }
+        $evaluationCheck = $this->evaluationService->checkEvaluation($userid, $examCode);
 
         View::rendertemplate('header', $this->data);
-        View::render('administration/evaluate-exam-view', $this->data);
+        if (!empty($evaluationCheck)) {
+            $this->data['created_at'] = $evaluationCheck;
+            View::render('administration/evaluate-exam-view', $this->data);
+        } else {
+            View::render('administration/evaluate-exam-insert', $this->data);
+        }
         View::rendertemplate('footer');
     }
 
-    public function managementReporting()
-    {
+    public function managementReporting() {
         $this->data['title'] = 'Management Rapportage';
 
         $reportArray = array();
@@ -206,4 +204,5 @@ class Administration extends Controller
         View::render('administration/management-reporting', $this->data);
         View::rendertemplate('footer');
     }
+
 }
