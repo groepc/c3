@@ -147,7 +147,7 @@
                                     <?php if ($exam->getStudentAmount() <= $room->getSeats()): ?>
                                         <?php if ($room->getComputerRoom()): ?>
                                             <option value="<?=$room->getCode()?>"><?=$room->getCode()?> [<?=$room->getSeats()?>] (Computer)</option>
-                                        <?php else: ?>
+                                        <?php elseif (!$exam->getComputerRoom()): ?>
                                             <option value="<?=$room->getCode()?>"><?=$room->getCode()?> [<?=$room->getSeats()?>]</option>
                                         <?php endif; ?>
                                     <?php endif; ?>
