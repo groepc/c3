@@ -12,6 +12,8 @@
                 <th class="text-right">Aantal Studenten</th>
                 <th class="text-right">Aantal Ingeschreven</th>
                 <th class="text-right">Aantal Aanwezig</th>
+                <th class="text-right">Hoogste Cijfer</th>
+                <th class="text-right">Laagste Cijfer</th>
                 <th class="text-right">Gemiddeld Cijfer</th>
             </tr>
             </thead>
@@ -29,17 +31,25 @@
                         $presentArray[] = $subscription->getPresent();
                     }
                 }
+
+                $highestGrade = 'N/A';
+                $lowestGrade = 'N/A';
                 $averageGrade = 'N/A';
                 if (count($gradeArray) > 0) {
+                    $highestGrade = max($gradeArray);
+                    $lowestGrade = min($gradeArray);
                     $averageGrade = array_sum($gradeArray) / count($gradeArray);
                 }
                 $amountPresent = count($presentArray);
                 ?>
+
                 <tr>
                     <td><?=$planning->getExamCode()?></td>
                     <td class="text-right"><?=$planning->getExam()->getStudentAmount()?></td>
                     <td class="text-right"><?=count($subscriptions)?></td>
                     <td class="text-right"><?=$amountPresent?></td>
+                    <td class="text-right"><?=$highestGrade?></td>
+                    <td class="text-right"><?=$lowestGrade?></td>
                     <td class="text-right"><?=$averageGrade?></td>
                 </tr>
             <?php endforeach; ?>

@@ -19,7 +19,7 @@
             <tr></tr>
                 <th>Lokaal</th><td><?=$planning->getRoomCode()?></td>
             <tr></tr>
-                <th>Datum</th><td><?=$planning->getDateTime()?></td>
+                <th>Datum</th><td><?=date('d-m-Y H:i', strtotime($planning->getDateTime()))?></td>
             </tr>
         </table>
 
@@ -56,7 +56,7 @@
                     <td><?=$count?></td>
                     <td><?=$subscription->getUser()->getFirstname()?></td>
                     <td><?=$subscription->getUser()->getLastname()?></td>
-                    <td><?=$subscription->getDateTime()?></td>
+                    <td><?=date('d-m-Y', strtotime($subscription->getDateTime()))?></td>
                     <td><?=$subscription->getGrade()?></td>
                     <td><?=$subscription->getPresent()?></td>
                 </tr>

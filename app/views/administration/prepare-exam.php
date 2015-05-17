@@ -20,7 +20,7 @@
             <?php/** @var \models\Planning $planning */ ?>
             <?php foreach ($data['planning'] as $planning): ?>
                 <tr>
-                    <td><?=$planning->getDateTime()?></td>
+                    <td><?=date('d-m-Y H:i', strtotime($planning->getDateTime()))?></td>
                     <td><?=$planning->getRoomCode()?></td>
                     <td><?=$planning->getExamCode()?></td>
                     <td><?=$planning->getExam()->getCourse()?>
