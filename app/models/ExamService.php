@@ -18,7 +18,19 @@ class ExamService extends Model
 
     public function fetchExams($offset = 0, $amount = 100)
     {
-        $data = $this->_db->select('SELECT * FROM tentamen LIMIT :offset, :amount', array(':offset' => $offset, ':amount' => $amount));
+        $query = 'SELECT *
+                  FROM tentamen t
+                  LEFT OUTER JOIN planning p
+                  ON (t.code = p.tentamencode)
+                  WHERE p.tentamencode IS NULL
+                  LIMIT :offset, :amount';
+        $data = $this->_db->select(
+            $query,
+            array(
+                ':offset' => $offset,
+                ':amount' => $amount
+            )
+        );
 
         $examArray = array();
         foreach ($data as $examData) {
